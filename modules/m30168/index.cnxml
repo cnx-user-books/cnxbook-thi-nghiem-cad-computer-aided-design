@@ -1,0 +1,36 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:md="http://cnx.rice.edu/mdml">
+  <title>Lời nói đầu - Giáo trình thực hành Cad</title>
+  <metadata>
+  <md:content-id>m30168</md:content-id><md:title>Lời nói đầu - Giáo trình thực hành Cad</md:title>
+  <md:abstract/>
+  <md:uuid>f46049b6-5be0-4de1-887f-bebceb4b6ab5</md:uuid>
+</metadata>
+
+<content>
+    <para id="id5813346">Lời nói đầu</para>
+    <para id="id5813351">Cùng với sự phát triển nhanh chóng của máy tính, CAD (Computer-Aided Desgin) được xây dựng ngày càng hoàn thiện và ứng dụng trong hầu hết các lĩnh vực khoa học kỹ thuật. Đối với chuyên ngành Điện tử, nhiều phần mềm CAD cho phép thiết kế mạch, mô phỏng và vẽ mạch in một cách nhanh chóng và hiệu quả như OrCAD/Pspice, Multisim (Electronics WorkBench), MicroSim, ExpeditionPCB, … </para>
+    <para id="id6775072">Tuy nhiên, đây là các phần mềm đóng gói chỉ được ứng dụng trong chuyên môn hẹp là Điện tử, nó không cho phép lập trình mô phỏng các hệ thống động (Dynamic systems) bất kỳ khác. Vì vậy, chương trình đào tạo môn CAD cho sinh viên Điện tử chuyên ngành Viễn thông và Tự động hóa đã hướng tới phần mềm Matlab. Đây là một ngôn ngữ lập trình cấp cao dạng nguồn mở, nó hổ trợ rất nhiều thư viện chức năng chuyên biệt từ Toán học, Kinh tế, Logic mờ, Truyền thông, Điều khiển tự động, … đến điều khiển phần cứng cho các thiết bị. Đồng thời, nó cho phép người sử dụng bổ sung các công cụ tự tạo làm phong phú thêm khả năng phân tích, thiết kế và mô phỏng các hệ thống động liên tục và rời rạc, tuyến tính và phi tuyến bất kỳ. Với những ưu điểm nổi bậc của mình, Matlab đã được nhiều trường Đại học hàng đầu trên thế giới áp dụng và giảng dạy.</para>
+    <para id="id6775122">Tham vọng thì nhiều nhưng trong phạm vi 30 tiết thực hành, chúng ta chỉ có thể đề cập đến những vấn đề cơ bản nhất. Hy vọng từ đó sinh viên tự nghiên cứu, học hỏi để có thể thiết kế và mô phỏng các mô hình Hệ thống Viễn thông hay các Hệ điều khiển tự động. Đồng thời cũng nắm sơ lược về các phần mềm mô phỏng mạch và vẽ mạch in như Multisim, OrCad,…</para>
+    <para id="id6775140">Giáo trình này gồm 7 bài, mỗi bài 5 tiết. Sinh viên chọn 6 bài để thực tập:</para>
+    <para id="id6775147">1. Thao tác trong cửa sổ lệnh của Matlab.</para>
+    <para id="id6775153">2. Hàm và Script files.</para>
+    <para id="id6775158">3. Symbolic và Simulink.</para>
+    <para id="id6775164">4. Mô hình hệ thống Viễn thông.(sinh viên chuyên ngành VT)</para>
+    <para id="id5813892">5. Mô hình hệ thống Điều khiển tự động.(sinh viên chuyên ngành ĐKTĐ)</para>
+    <para id="id5813908">6. Tạo giao diện trong Matlab.</para>
+    <para id="id5813914">7. Thiết kế - Mô phỏng và vẽ mạch in(các sinh viên không chọn bài 4 hoặc 5)</para>
+    <para id="id5813930">Mặc dù đã hết sức cố gắng, song do trình độ hạn chế của người viết mà nhiều vấn đề chắc chưa được trình bày tốt cũng như chưa bố cục hợp lý. Xin chân thành cảm ơn mọi ý kiến đóng góp của sinh viên và các bạn đồng nghiệp.</para>
+    <para id="id6707009">TcAD, tháng 11 năm 2003</para>
+    <para id="id5813954">Nguyễn Chí Ngôn</para>
+    <para id="id5813958">Địa chỉ liên hệ:</para>
+    <para id="id5813962">Bộ môn Viễn thông và Tự động hóa</para>
+    <para id="id5813969">Khoa Công nghệ Thông tin, Đại học Cần thơ</para>
+    <para id="id5813978">01 Lý Tự Trọng, Tp. Cần thơ, tỉnh Cần thơ</para>
+    <para id="id5813987">Tel: (71) 831301Fax: (71) 830841</para>
+    <para id="id5813994">Email: <link url="mailto:ncngon@ctu.edu.vn">ncngon@ctu.edu.vn</link></para>
+    <para id="id5945946">URL: <link url="http://www.cit.ctu.edu.vn/department/ac/ncngon.html">http://www.cit.ctu.edu.vn/department/ac/ncngon.html </link></para>
+    <para id="id5945973">Mục lục</para>
+    <para id="id6706800">Lời nói đầu1</para>
+    <para id="id6706807">Mục lục3</para>
+  </content>
+</document>

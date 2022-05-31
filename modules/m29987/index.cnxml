@@ -1,0 +1,254 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:md="http://cnx.rice.edu/mdml">
+  <title>Thao tác trong cửa sổ lệnh của matlab</title>
+  <metadata>
+  <md:content-id>m29987</md:content-id><md:title>Thao tác trong cửa sổ lệnh của matlab</md:title>
+  <md:abstract>Đây là giáo trình về thao tác trong cửa sổ lệnh của Matlab</md:abstract>
+  <md:uuid>2d5cac80-7a04-4813-9510-06423e2c2984</md:uuid>
+</metadata>
+
+<content>
+    <section id="id-516091934964">
+      <title>MỤc tiêu</title>
+      <para id="id5654757">Bài thí nghiệm này giúp sinh viên làm quen nhanh với Matlab 6.5 bằng các thao tác đơn giản trên ma trận, vectơ, biểu thức toán học, các lệnh đồ họa, …, thực hiện ngay trên cửa sổ lệnh (command window) của Matlab. </para>
+    </section>
+    <section id="id-582465629297">
+      <title>Tham khẢo</title>
+      <para id="id5654782">[1].Nguyễn Hứa Duy Khang, Bài giảng môn CAD, Bộ môn Viễn thông &amp; Tự động hóa, khoa Công nghệ thông tin, Đại học Cần thơ, 2001.</para>
+      <para id="id5654799">[2].The Mathworks Inc., Matlab Notebook User’s Guide, 2003.</para>
+      <para id="id5654808">[3].Nguyễn Hoài Sơn - Đỗ Thanh Việt - Bùi Xuân Lâm, Ứng dụng MATLAB trong tính toán kỹ thuật, Tập 1, NXB ĐHQG Tp. HCM, 2000</para>
+      <para id="id5654822">[4].Nguyễn Hữu Tình - Lê Tấn Hùng - Phạm Thị Ngọc Yến - Nguyễn Thị Lan Hương, Cơ sở Matlab &amp; ứng dụng, NXB KH và Kỹ thuật, 1999.</para>
+      <para id="id5662755">[5].<link url="http://www.facstaff.bucknell.edu/maneval/help211/exercises.html">http://www.facstaff.bucknell.edu/maneval/help211/exercises.html</link></para>
+      <para id="id5662776">[6]. <link url="http://www.glue.umd.edu/~nsw/ench250/matlab.htm">http://www.glue.umd.edu/~nsw/ench250/matlab.htm</link></para>
+    </section>
+    <section id="id-493762780585">
+      <title>ThỰc hành</title>
+      <para id="id5662808">Từ cửa sổ lệnh của Matlab, sinh viên lần lượt thực hiện các thao tác sau:</para>
+      <section id="id-821604206622">
+        <title>Ma trận</title>
+        <para id="id5662825">Để tạo ma trận trong Matlab ta chỉ cần liệt các phần tử của ma trận trong cặp dấu ngoặc vuông ([…]). Các phần tử trên cùng hàng được phân biệt bởi dấu phẩy (,) hoặc khoảng trắng (space). Các hàng của ma trận, phân cách nhau bởi dấu chấm phẩy (;). Ví dụ, nhập ma trận A có 4 hàng, 4 cột như sau: </para>
+        <para id="id5662846">&gt;&gt; A=[16 3 2 13; 5 10 11 8; 9 6 7 12; 4 15 14 1]</para>
+        <para id="id5662852">&gt;&gt; size(A)</para>
+        <para id="id5662857">Để truy xuất đến từng phần tử của ma trận ta dùng chỉ số phần tử tương ứng. Ví dụ, phần tử ở hàng thứ 2, cột thứ 3 của A là A(2,3).</para>
+        <para id="id5662868">&gt;&gt; A(2,3)</para>
+        <para id="id5662876">Cho ma trận A=[2 4 1; 6 7 2; 3 5 9], sinh viên dùng các lệnh cần thiết để:</para>
+        <list id="id5662891" list-type="bulleted">
+          <item>Lấy dòng đầu tiên của ma trận A.</item>
+          <item>Tạo ma trận B bằng 2 dòng cuối cùng của A.</item>
+          <item>Tính tổng các phần tử trên các cột của A. (gợi ý: tính tổng các phần tử trên cột 1: sum(A(:,1))).</item>
+          <item>Tính tổng các phần tử trên các dòng của A.</item>
+        </list>
+        <para id="id5662934">Cho ma trận A=[2 7 9 7; 3 1 5 6; 8 1 2 5], sinh viên giải thích kết quả của các lệnh sau:</para>
+        <list id="id5662951" list-type="enumerated">
+          <item>A'</item>
+          <item>A(:,[1 4])</item>
+          <item>A([2 3],[3 1])</item>
+          <item>reshape(A,2,6)</item>
+          <item>A(:)</item>
+          <item>[A A(end,:)]</item>
+          <item>A(1:3,:)</item>
+          <item>[A ; A(1:2,:)]</item>
+          <item>sum(A)</item>
+          <item>sum(A')</item>
+          <item>[ [ A ; sum(A) ] [ sum(A,2) ; sum(A(:)) ] ]</item>
+        </list>
+        <para id="id5663016">Giải hệ phương Ax=b, với: A=
+<m:math><m:semantics><m:mrow><m:mstyle fontsize="12pt"><m:mrow><m:mfenced open="[" close="]"><m:mtable><m:mtr><m:mtd><m:mrow><m:mn>1</m:mn><m:mrow/></m:mrow></m:mtd><m:mtd><m:mrow><m:mn>0</m:mn><m:mrow/></m:mrow></m:mtd><m:mtd><m:mrow><m:mrow><m:mo stretchy="false">−</m:mo><m:mn>1</m:mn></m:mrow><m:mrow/></m:mrow></m:mtd></m:mtr><m:mtr><m:mtd><m:mrow><m:mn>2</m:mn><m:mrow/></m:mrow></m:mtd><m:mtd><m:mrow><m:mn>5</m:mn><m:mrow/></m:mrow></m:mtd><m:mtd><m:mrow><m:mn>3</m:mn><m:mrow/></m:mrow></m:mtd></m:mtr><m:mtr><m:mtd><m:mrow><m:mn>3</m:mn><m:mrow/></m:mrow></m:mtd><m:mtd><m:mrow><m:mrow><m:mo stretchy="false">−</m:mo><m:mn>1</m:mn></m:mrow><m:mrow/></m:mrow></m:mtd><m:mtd><m:mrow><m:mn>0</m:mn><m:mrow/></m:mrow></m:mtd></m:mtr></m:mtable></m:mfenced></m:mrow></m:mstyle><m:mrow/></m:mrow><m:annotation encoding="StarMath 5.0"> size 12{ left [ matrix {
+1 {} # 0 {} #  - 1 {} ##
+2 {} # 5 {} # 3 {} ##
+3 {} #  - 1 {} # 0{}
+}  right ]} {}</m:annotation></m:semantics></m:math> và b=
+<m:math><m:semantics><m:mrow><m:mstyle fontsize="12pt"><m:mrow><m:mfenced open="[" close="]"><m:mtable><m:mtr><m:mtd><m:mrow><m:mn>1</m:mn><m:mrow/></m:mrow></m:mtd></m:mtr><m:mtr><m:mtd><m:mrow><m:mn>1</m:mn><m:mrow/></m:mrow></m:mtd></m:mtr><m:mtr><m:mtd><m:mrow><m:mo stretchy="false">−</m:mo><m:mn>2</m:mn></m:mrow></m:mtd></m:mtr></m:mtable></m:mfenced></m:mrow></m:mstyle><m:mrow/></m:mrow><m:annotation encoding="StarMath 5.0"> size 12{ left [ matrix {
+1 {} ##
+1 {} ##
+ - 2
+}  right ]} {}</m:annotation></m:semantics></m:math>. Gợi ý: x=A\b.</para>
+      </section>
+      <section id="id-208234029733">
+        <title>Vectơ</title>
+        <para id="id5663246">Vectơ thực chất cũng là ma trận có kích thước (n x 1) hay (1 x n), nên ta có thể tạo ra vectơ như cách tạo ra ma trận. Ngoài ra, có thể dùng một số cách sau:</para>
+        <para id="id5663264">&gt;&gt;x=0:0.1:1</para>
+        <para id="id5663269">&gt;&gt;y=linspace(1, 10, 20) % vecto 20 phan tu cach deu nhau tu 1 den 10</para>
+        <para id="id5663279">&gt;&gt;z=rand(10,1)</para>
+        <para id="id5663284">Cho vectơ x = [3 1 5 7 9 2 6], giải thích kết quả của các lệnh sau:</para>
+        <list id="id5663300" list-type="bulleted">
+          <item>x(3)</item>
+          <item>x(1:7)</item>
+          <item>x(1:end)</item>
+          <item>x(1:end-1)</item>
+          <item>x(6:-2:1)</item>
+          <item>x([1 6 2 1 1])</item>
+          <item>sum(x)</item>
+        </list>
+        <para id="id5663342">Sinh viên hãy tạo một vectơ x có 100 phần tử, sao cho: </para>
+        <para id="id5663357"><m:math><m:semantics><m:mrow><m:mstyle fontsize="12pt"><m:mrow><m:mrow><m:msub><m:mi>x</m:mi><m:mstyle fontsize="8pt"><m:mrow><m:mi>n</m:mi></m:mrow></m:mstyle></m:msub><m:mo stretchy="false">=</m:mo><m:mfrac><m:mrow><m:mrow><m:mo stretchy="false">(</m:mo><m:mo stretchy="false">−</m:mo><m:mn>1</m:mn></m:mrow><m:msup><m:mo stretchy="false">)</m:mo><m:mstyle fontsize="8pt"><m:mrow><m:mrow><m:mi>n</m:mi><m:mo stretchy="false">+</m:mo><m:mn>1</m:mn></m:mrow></m:mrow></m:mstyle></m:msup></m:mrow><m:mrow><m:mo stretchy="false">(</m:mo><m:mrow><m:mn>2n</m:mn><m:mo stretchy="false">−</m:mo><m:mn>1</m:mn></m:mrow><m:mo stretchy="false">)</m:mo></m:mrow></m:mfrac></m:mrow></m:mrow></m:mstyle><m:mrow/></m:mrow><m:annotation encoding="StarMath 5.0"> size 12{x rSub { size 8{n} } = {  { \(  - 1 \)  rSup { size 8{n+1} } }  over  { \( 2n - 1 \) } } } {}</m:annotation></m:semantics></m:math>. </para>
+        <para id="id5663487">Gợi ý: Tạo vectơ n có 100 phần tử từ 1 đến 100, dùng toán tử dấu chấm (.) để xác định x.</para>
+      </section>
+      <section id="id-614419372078">
+        <title>Các đa thức</title>
+        <para id="id5663513">Các đa thức trong Matlab được mô tả bằng các vectơ hàng với các phần tử của vectơ chính là các hệ số của đa thức, xếp theo thứ tự số mũ giảm dần. Ví dụ, đa thức m = s4-s3+4s2-5s-1 được biểu diễn là:</para>
+        <para id="id5663554">&gt;&gt;m=[1 -1 4 5 -1]</para>
+        <para id="id5663568">Để xác định giá trị của đa thức, ta dùng lệnh polyval. Ví dụ, xác định giá trị của đa thức tại điểm s=2:</para>
+        <para id="id5663588">&gt;&gt;polyval(m,2)</para>
+        <para id="id5663593">Để xác định nghiệm của đa thức, ta dùng lệnh roots. Ví dụ:</para>
+        <para id="id5663611">&gt;&gt;roots(m) </para>
+        <para id="id5663615">Cho phương trình x2-4x+5=0, giải phương trình theo 2 cách, cách 1 – tính delta theo phương pháp cổ điển, cách 2 – dùng hàm roots, hãy so sánh kết quả.</para>
+        <list id="id5663653" list-type="bulleted">
+          <item>Cách1: </item>
+        </list>
+        <para id="id5663663">&gt;&gt;a=1;</para>
+        <para id="id5663668">&gt;&gt;b=-4;</para>
+        <para id="id5663672">&gt;&gt;c=5</para>
+        <para id="id5663677">&gt;&gt;x1=(-b+sqrt(b^2-4*a*c))/(2*a)</para>
+        <para id="id5663682">&gt;&gt;x2=(-b-sqrt(b^2-4*a*c))/(2*a)</para>
+        <list id="id5663688" list-type="bulleted">
+          <item>Cách 2:</item>
+        </list>
+        <para id="id5663696">&gt;&gt;m=[a b c];</para>
+        <para id="id5663701">&gt;&gt;x=roots(m)</para>
+        <para id="id5663706">Hãy thay đổi các giá trị khác nhau của a, b và c tương ứng trong 2 cách giải trên. So sánh kết quả và nhận xét.</para>
+        <para id="id5663715">Giải phương trình x3- 2x2+4x+5=0. Kiểm chứng kết quả thu được bằng hàm polyval. Sinh viên có nhận xét gì về kết quả kiểm chứng.</para>
+        <para id="id5663759">Lặp lại câu  cho phương trình x7-2=0.</para>
+        <para id="id5663797">Sinh viên thử dùng hàm poly để tạo đa thức từ các nghiệm cho trước.</para>
+        <para id="id5663824">&gt;&gt;help poly</para>
+      </section>
+      <section id="id-940664396739">
+        <title>Đồ họa</title>
+        <para id="id5663837">Matlab hổ trợ chế độ đồ họa rất mạnh, bao gồm đồ họa 2D và 3D, với các trục tọa độ tuyến tính và phi tuyến bất kỳ.</para>
+        <section id="id-880956692519">
+          <title>Đồ họa 2 D</title>
+          <para id="id5663854">Đồ họa 2D chủ yếu dựa trên lệnh plot. Để được giúp đỡ, ta gõ:</para>
+          <para id="id5663872">&gt;&gt;help plot</para>
+          <para id="id5663877">Vẽ đồ thị hàm số y1=sinx.cos2x và hàm số y2=sinx2 trong [0-2], trên cùng hệ trục tọa độ, ta lần lượt thực hiện như sau:</para>
+          <para id="id5663928">&gt;&gt;x=0:0.01:2*pi;</para>
+          <para id="id5663933">&gt;&gt;y1=sin(x).*cos(2*x);%nhan tuong tung tung phan tu</para>
+          <para id="id5663942">&gt;&gt;plot(x,y1)</para>
+          <para id="id5663947">&gt;&gt;grid on%hien thi luoi</para>
+          <para id="id5663957">Sau khi thu được đồ thị hàm y1, để vẽ y2 trên cùng đồ thị, ta thực hiện:</para>
+          <para id="id5663970">&gt;&gt;hold on%giu hinh, mac nhien la hold off</para>
+          <para id="id5663979">&gt;&gt;y2=sin(x.^2);%luy thua tung phan tu</para>
+          <para id="id5663988">&gt;&gt;plot(x,y2,’k’)%duong ve co mau den</para>
+          <para id="id5663998">&gt;&gt;axis([0 4*pi –1.25 1.25])%dinh lai toa do hien thi</para>
+          <para id="id5664013">Ta có thể đặt nhãn cho các trục cũng như tiêu đề cho đồ thị:</para>
+          <para id="id5664023">&gt;&gt;xlabel(‘Time’)</para>
+          <para id="id5664028">&gt;&gt;ylabel(‘Amplitude’)</para>
+          <para id="id5664033">&gt;&gt;title(‘y1=sinx.cos2x and y2=sin(x^2)’)</para>
+          <para id="id5664039">&gt;&gt;legend(‘sinx.cos2x’,’sinx^2’)</para>
+          <figure id="id5664048">
+            <media id="id1166837320534" alt=""><image src="graphics1.wmf" mime-type="image/wmf" height="214" width="403"/></media>
+          </figure>
+          <para id="id5664072">Hình 1.1 – Biểu diễn đồ thị các hàm số trên cùng hệ trục tọa độ</para>
+          <para id="id5664079">Matlab hổ trợ rất nhiều thuộc tính đồ họa, để có thể kiểm soát các thuộc tính này ta cần dùng đến thẻ đồ họa. Ví dụ:</para>
+          <para id="id5664101">&gt;&gt;close all</para>
+          <para id="id5664106">&gt;&gt;x=[0 1 2 3];</para>
+          <para id="id5664110">&gt;&gt;y=[0 4 1 5];</para>
+          <para id="id5664115">&gt;&gt;h=plot(x,y)</para>
+          <para id="id5664120">h chính là thẻ đồ họa của hàm plot, để thấy các thuộc tính đồ hoạ, ta dùng lệnh:</para>
+          <para id="id5664136">&gt;&gt;set(h)</para>
+          <para id="id5664140">Bây giờ ta thử đặt một số thuộc tính đồ họa cho h.</para>
+          <para id="id5664147">&gt;&gt;set(h,’Color’, ‘r’)%dat lai mau do</para>
+          <para id="id5664157">&gt;&gt;set(h,'LineWidth',6)%dat do rong duong</para>
+          <para id="id5664167">&gt;&gt;set(h,'Marker','v','MarkerSize',6)</para>
+          <figure id="id5664176">
+            <media id="id1166831920483" alt=""><image src="graphics2.wmf" mime-type="image/wmf" height="191" width="364"/></media>
+          </figure>
+          <para id="id5664200">Hình 1.2 – Thay đổi thuộc tính đường biểu diễn</para>
+          <para id="id5664206">Dữ liệu dùng để vẽ được đặt trong ‘XData’ và ‘YData’.</para>
+          <para id="id5664216">&gt;&gt; set(h,'XData',[0 1 1 3])</para>
+          <para id="id5664222">&gt;&gt;set(h,'YData',[0 3 5 1])</para>
+          <para id="id5664227">Từ kết quả này, ta nhận thấy nếu dữ liệu trong ‘XData’ và ‘YData’ biến thiên theo thời gian, thì trên cửa sổ đồ họa (figure) ta sẽ thấy hình ảnh sinh động kiểu ‘animation’.</para>
+          <figure id="id5664242">
+            <media id="id1166832742426" alt=""><image src="graphics3.wmf" mime-type="image/wmf" height="191" width="364"/></media>
+          </figure>
+          <para id="id5664266">Hình 1.3 - Thay đổi dữ liệu trong cửa sổ đồ họa </para>
+          <para id="id5664272">Tương tự như hàm plot, sinh viên thử dùng các hàm semilogx, semilogy và loglog cho trường hợp trục tọa độ phi tuyến.</para>
+          <para id="id5664323">Ngoài các lệnh biểu diễn đường cong trong tọa độ Descartes, Matlab cũng hổ trợ việc vẽ đồ thị hàm số trong hệ tọa độ cực bằng hàm polar.</para>
+          <para id="id5664351">&gt;&gt;theta=0:0.05:2*pi;</para>
+          <para id="id5664356">&gt;&gt;r=sin(5*theta);</para>
+          <para id="id5664361">&gt;&gt;polar(theta,r)</para>
+          <figure id="id5664369">
+            <media id="id1166830653610" alt=""><image src="graphics4.wmf" mime-type="image/wmf" height="193" width="339"/></media>
+          </figure>
+          <para id="id5664392">Hình 1.4 – Biểu diễn đồ thị hàm số trong hệ tọa độ cực</para>
+        </section>
+        <section id="id-646922124959">
+          <title>Đồ họa 3 D</title>
+          <para id="id5664408">Matlab cung cấp nhiều hàm vẽ đồ thị 3D, chẳng hạn: plot3 - dùng để vẽ các đường trong không gian 3 chiều; mesh và surf - dùng để vẽ vật thể 3D (gõ help mesh và help surf để biết thêm các hàm 3D có liên quan).</para>
+          <para id="id5664466">Vẽ đồ thị 3D bằng hàm plot3:</para>
+          <para id="id5664492">&gt;&gt;t=0:pi/50:10*pi;</para>
+          <para id="id5664496">&gt;&gt;x=sin(t);</para>
+          <para id="id5664501">&gt;&gt;y=cos(t);</para>
+          <para id="id5664506">&gt;&gt;z=t;</para>
+          <para id="id5664511">&gt;&gt;subplot(121), plot3(x,y,z)%ve tren o thu nhat</para>
+          <para id="id5664520">&gt;&gt;grid on </para>
+          <para id="id5664524">&gt;&gt;subplot(122), plot3(x,y,t.^2)%ve tren o thu hai</para>
+          <para id="id5664533">&gt;&gt; grid on</para>
+          <figure id="id5664541">
+            <media id="id1166830806989" alt=""><image src="graphics5.wmf" mime-type="image/wmf" height="123" width="420"/></media>
+          </figure>
+          <para id="id5664565">Hình 1.5 – Vẽ đồ thị 3D bằng hàm plot3</para>
+          <para id="id5664571">Vẽ mặt paraboloid z=x2+y2 trong không gian 3 chiều:</para>
+          <para id="id5664606">&gt;&gt;close all</para>
+          <para id="id5664610">&gt;&gt;t=-5:0.1:5;</para>
+          <para id="id5664615">&gt;&gt; [x,y]=meshgrid(t);%dinh luoi ve</para>
+          <para id="id5664624">&gt;&gt;z=x.^2+y.^2;</para>
+          <para id="id5664629">&gt;&gt; subplot(2,2,1), mesh(z)%ve mat luoi 3D</para>
+          <para id="id5664636">&gt;&gt; title('mesh(z)')</para>
+          <para id="id5664641">&gt;&gt; subplot(2,2,2), meshc(z)%giong mesh nhung co them duong vien</para>
+          <para id="id5664649">&gt;&gt; title('meshc(z)')</para>
+          <para id="id5664654">&gt;&gt; subplot(2,2,3), meshz(z)%co them luoi tren mat x,y</para>
+          <para id="id5664662">&gt;&gt; title('meshz(z)')</para>
+          <para id="id5664667">&gt;&gt; subplot(2,2,4), waterfall(z)%chi ve luoi theo 1 huong</para>
+          <para id="id5664675">&gt;&gt; title('waterfall(z)')</para>
+          <para id="id5664680">
+        ***SORRY, THIS MEDIA TYPE IS NOT SUPPORTED.***
+      </para>
+          <para id="id5664707">Hình 1.6 - Vẽ mặt paraboloid</para>
+          <para id="id5664720">Vẽ mặt 
+<m:math><m:semantics><m:mrow><m:mstyle fontsize="12pt"><m:mrow><m:mrow><m:mi>z</m:mi><m:mo stretchy="false">=</m:mo><m:mfrac><m:mrow><m:mtext>sin</m:mtext><m:mfenced open="" close=""><m:msqrt><m:mrow><m:msup><m:mi>x</m:mi><m:mstyle fontsize="8pt"><m:mrow><m:mn>2</m:mn></m:mrow></m:mstyle></m:msup><m:mo stretchy="false">+</m:mo><m:msup><m:mi>y</m:mi><m:mstyle fontsize="8pt"><m:mrow><m:mn>2</m:mn></m:mrow></m:mstyle></m:msup></m:mrow></m:msqrt></m:mfenced></m:mrow><m:msqrt><m:mrow><m:msup><m:mi>x</m:mi><m:mstyle fontsize="8pt"><m:mrow><m:mn>2</m:mn></m:mrow></m:mstyle></m:msup><m:mo stretchy="false">+</m:mo><m:msup><m:mi>y</m:mi><m:mstyle fontsize="8pt"><m:mrow><m:mn>2</m:mn></m:mrow></m:mstyle></m:msup></m:mrow></m:msqrt></m:mfrac></m:mrow></m:mrow></m:mstyle><m:mrow/></m:mrow><m:annotation encoding="StarMath 5.0"> size 12{z= {  {"sin" left ( sqrt {x rSup { size 8{2} } +y rSup { size 8{2} } }  right )}  over  { sqrt {x rSup { size 8{2} } +y rSup { size 8{2} } } } } } {}</m:annotation></m:semantics></m:math> trong không gian 3 chiều:</para>
+          <para id="id5664860">&gt;&gt;x=-8:0.5:8;</para>
+          <para id="id5664865">&gt;&gt;y=x;</para>
+          <para id="id5664870">&gt;&gt;[x,y]=meshgrid(x,y);</para>
+          <para id="id5664875">&gt;&gt;r=sqrt(x.^2+y.^2);</para>
+          <para id="id5664880">&gt;&gt;z=sin(r)./r;</para>
+          <para id="id5664885">&gt;&gt;surf(x,y,z)</para>
+          <figure id="id5664893">
+            <media id="id1166830623818" alt=""><image src="graphics6.wmf" mime-type="image/wmf" height="173" width="245"/></media>
+          </figure>
+          <para id="id5664916">Hình 1.7 – Một biểu diễn đồ thị 3D khác</para>
+          <para id="id5664923">Sinh viên thử vẽ mặt trụ 
+<m:math><m:semantics><m:mrow><m:mstyle fontsize="12pt"><m:mrow><m:mrow><m:mi>z</m:mi><m:mo stretchy="false">=</m:mo><m:msqrt><m:mrow><m:msup><m:mi>x</m:mi><m:mstyle fontsize="8pt"><m:mrow><m:mn>4</m:mn></m:mrow></m:mstyle></m:msup><m:mo stretchy="false">+</m:mo><m:msup><m:mi>y</m:mi><m:mstyle fontsize="8pt"><m:mrow><m:mn>2</m:mn></m:mrow></m:mstyle></m:msup></m:mrow></m:msqrt></m:mrow></m:mrow></m:mstyle><m:mrow/></m:mrow><m:annotation encoding="StarMath 5.0"> size 12{z= sqrt {x rSup { size 8{4} } +y rSup { size 8{2} } } } {}</m:annotation></m:semantics></m:math> bằng hàm mesh và hàm surf.</para>
+        </section>
+      </section>
+    </section>
+    <section id="id-603347023848">
+      <title>TỰ chỌn</title>
+      <para id="id5665047">Giải hệ phương trình sau:</para>
+      <para id="id5665064">2x1+4x2+6x3 – 2x4=0</para>
+      <para id="id5665122">x1+2x2+ x3 + 2x4=1</para>
+      <para id="id5665184">2x2+4x3 + 2x4=2</para>
+      <para id="id5665232">3x1- x2+ 10x4=10.</para>
+      <para id="id5665279">Chứng tỏ rằng (A+B)C=AC+BC, với:</para>
+      <para id="id5665296">A=
+<m:math><m:semantics><m:mrow><m:mstyle fontsize="12pt"><m:mrow><m:mfenced open="[" close="]"><m:mtable><m:mtr><m:mtd><m:mrow><m:mtext>10</m:mtext><m:mrow/></m:mrow></m:mtd><m:mtd><m:mrow><m:mrow><m:mo stretchy="false">−</m:mo><m:mn>2</m:mn></m:mrow><m:mrow/></m:mrow></m:mtd></m:mtr><m:mtr><m:mtd><m:mrow><m:mtext>20</m:mtext><m:mrow/></m:mrow></m:mtd><m:mtd><m:mrow><m:mn>4</m:mn><m:mrow/></m:mrow></m:mtd></m:mtr><m:mtr><m:mtd><m:mrow><m:mn>3</m:mn><m:mrow/></m:mrow></m:mtd><m:mtd><m:mrow><m:mn>6</m:mn><m:mrow/></m:mrow></m:mtd></m:mtr></m:mtable></m:mfenced></m:mrow></m:mstyle><m:mrow/></m:mrow><m:annotation encoding="StarMath 5.0"> size 12{ left [ matrix {
+"10" {} #  - 2 {} ##
+"20" {} # 4 {} ##
+3 {} # 6{}
+}  right ]} {}</m:annotation></m:semantics></m:math>, B=
+<m:math><m:semantics><m:mrow><m:mstyle fontsize="12pt"><m:mrow><m:mfenced open="[" close="]"><m:mtable><m:mtr><m:mtd><m:mrow><m:mn>3</m:mn><m:mrow/></m:mrow></m:mtd><m:mtd><m:mrow><m:mn>1</m:mn><m:mrow/></m:mrow></m:mtd></m:mtr><m:mtr><m:mtd><m:mrow><m:mrow><m:mo stretchy="false">−</m:mo><m:mtext>10</m:mtext></m:mrow><m:mrow/></m:mrow></m:mtd><m:mtd><m:mrow><m:mn>2</m:mn><m:mrow/></m:mrow></m:mtd></m:mtr><m:mtr><m:mtd><m:mrow><m:mn>0</m:mn><m:mrow/></m:mrow></m:mtd><m:mtd><m:mrow><m:mn>5</m:mn><m:mrow/></m:mrow></m:mtd></m:mtr></m:mtable></m:mfenced></m:mrow></m:mstyle><m:mrow/></m:mrow><m:annotation encoding="StarMath 5.0"> size 12{ left [ matrix {
+3 {} # 1 {} ##
+ - "10" {} # 2 {} ##
+0 {} # 5{}
+}  right ]} {}</m:annotation></m:semantics></m:math> và C=
+<m:math><m:semantics><m:mrow><m:mstyle fontsize="12pt"><m:mrow><m:mfenced open="[" close="]"><m:mtable><m:mtr><m:mtd><m:mrow><m:mrow><m:mo stretchy="false">−</m:mo><m:mn>3</m:mn></m:mrow><m:mrow/></m:mrow></m:mtd><m:mtd><m:mrow><m:mn>4</m:mn><m:mrow/></m:mrow></m:mtd></m:mtr><m:mtr><m:mtd><m:mrow><m:mn>6</m:mn><m:mrow/></m:mrow></m:mtd><m:mtd><m:mrow><m:mn>1</m:mn><m:mrow/></m:mrow></m:mtd></m:mtr></m:mtable></m:mfenced></m:mrow></m:mstyle><m:mrow/></m:mrow><m:annotation encoding="StarMath 5.0"> size 12{ left [ matrix {
+ - 3 {} # 4 {} ##
+6 {} # 1{}
+}  right ]} {}</m:annotation></m:semantics></m:math>.</para>
+      <para id="id5665578">Sinh viên thử vẽ hình sau (Hình 1.8):</para>
+      <para id="id5665595">
+        ***SORRY, THIS MEDIA TYPE IS NOT SUPPORTED.***
+      </para>
+      <para id="id5665622">(Hình 1.8)</para>
+      <para id="id5665626">Từ cửa sổ lệnh của Matlab, nhập: demos. Chọn MATLAB  Graphics  3D-plots. Chạy chương trình demo này.</para>
+    </section>
+  </content>
+</document>

@@ -1,0 +1,204 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:md="http://cnx.rice.edu/mdml">
+  <title>Tạo giao diện trong Mathlab</title>
+  <metadata>
+  <md:content-id>m30055</md:content-id><md:title>Tạo giao diện trong Mathlab</md:title>
+  <md:abstract>Đây là giáo trình về tạo giao diện trong Matlab</md:abstract>
+  <md:uuid>c1a2a411-fcdf-424a-ba5a-b42b275212c7</md:uuid>
+</metadata>
+
+<content>
+    <section id="id-729298776315">
+      <title>MỤc tiêu</title>
+      <para id="id6106606">Bài thí nghiệm này trang bị cho sinh viên một số kiến thức cơ bản để xây dựng giao diện người dùng trong môi trường Matlab, nhằm hoàn thiện một chương trình ứng dụng nhất định.</para>
+    </section>
+    <section id="id-899424995144">
+      <title>Tham khẢo</title>
+      <para id="id6106629">[1].The Mathworks Inc., Matlab Notebook User’s Guide, 2003.</para>
+      <para id="id6106638">[2].Nguyễn Hữu Tình - Lê Tấn Hùng - Phạm Thị Ngọc Yến - Nguyễn Thị Lan Hương, Cơ sở Matlab &amp; ứng dụng, NXB KH và Kỹ thuật, 1999.</para>
+      <para id="id6106651">[3].Nguyễn Hoài Sơn - Đỗ Thanh Việt - Bùi Xuân Lâm, Ứng dụng MATLAB trong tính toán kỹ thuật, Tập 1, NXB ĐHQG Tp. HCM, 2000 (trang 328-344).</para>
+    </section>
+    <section id="id-572445335674">
+      <title>ThỰc hành</title>
+      <para id="id6106675">Cũng như các ngôn ngữ cấp cao khác, Matlab hổ trợ nhiều công cụ chức năng cho phép lập trình tạo giao diện sử dụng đẹp và nhanh chóng. Ví dụ, các dạng nút ấn, cửa sổ soạn thảo, các dạng menu, … như hình 6.1.</para>
+      <para id="id6106691">
+        ***SORRY, THIS MEDIA TYPE IS NOT SUPPORTED.***
+      </para>
+      <para id="id6106719">Hình 6.1 – Các công cụ hổ trợ giao diện</para>
+      <para id="id6106725">Trong bài thí nghiệm này, sinh viên lần lượt thực hiện các bước được nêu ra để được một giao diện đơn giản như hình vẽ 6.2. Trong mỗi bước thực hành, sinh viên hãy quan sát kỹ đáp ứng của chương trình, từ đó tự mình rút ra kinh nghiệm về việc điều chỉnh các thuộc tính đồ hoạ của Matlab.</para>
+      <para id="id6106742">Tạo cửa sổ chính figure – ‘Welcome to User Interface’s Giude’ theo cách sau:</para>
+      <list id="id5752586" list-type="bulleted">
+        <item>Mở Matlab Editor</item>
+        <item>Nhập nội dung sau:</item>
+      </list>
+      <para id="id5752599"> % User Interface's Guide</para>
+      <para id="id5752604">%</para>
+      <para id="id5752610">% Matlab Experiments 2003</para>
+      <para id="id5752615">% TcAD, CIT, Cantho University</para>
+      <para id="id5752623">% ----------------------------------------------------------------------------------</para>
+      <para id="id5752630">% Initialize whole figure...</para>
+      <para id="id5752635">namefig = 'Welcome to User Interface''s Guide';</para>
+      <para id="id5752645">figpos = get(0,'DefaultFigurePosition'); % lay vi tri mac nhien</para>
+      <para id="id5752660">figpos(1)= figpos(1)-10; figpos(2)= figpos(2)-10;</para>
+      <para id="id5752673">figpos(3)= figpos(3)+10; figpos(4)= figpos(4)+10;</para>
+      <para id="id5752687">% Tao figure</para>
+      <para id="id5752692">fig=figure( ...</para>
+      <para id="id5752701">'Name', namefig, ...</para>
+      <para id="id5752710">'NumberTitle','off', ...</para>
+      <para id="id5752718">'Position',figpos);</para>
+      <figure id="id5752731">
+        <media id="id1170187583691" alt=""><image src="../../media/graphics1-36be.png" mime-type="image/png" height="354" width="396"/></media>
+      </figure>
+      <para id="id5752755">Hình 6.2 – Một giao diện đơn giản</para>
+      <list id="id5752764" list-type="bulleted">
+        <item>Lưu thành file giaodien.m</item>
+        <item>&gt;&gt;giaodien &lt;&gt;% thi hanh</item>
+      </list>
+      <para id="id5752800">Quan sát kết quả trên hình 6.3 (Lưu ý các thuộc tính: Name, Position)</para>
+      <figure id="id5752813">
+        <media id="id1170195172547" alt=""><image src="../../media/graphics2-79e1.png" mime-type="image/png" height="186" width="309"/></media>
+      </figure>
+      <para id="id5752837">(Hình 6.3)</para>
+      <list id="id5752842" list-type="bulleted">
+        <item>&gt;&gt;set(fig)% xem thuộc tính của figure trong cửa sổ lệnh</item>
+      </list>
+      <para id="id6099960">Thêm vào figure một axes cho phép hiển thị đồ họa:</para>
+      <list id="id6099975" list-type="bulleted">
+        <item>Nhập tiếp nội dung sau vào file giaodien.m</item>
+      </list>
+      <para id="id6099990">% --------------------------------------------------------------------------------</para>
+      <para id="id6100005">% main axes</para>
+      <para id="id6100012">axs=axes('Position',[0.05 0.4 0.65 0.55]);</para>
+      <list id="id6100020" list-type="bulleted">
+        <item>Lưu và thi hành file này.</item>
+      </list>
+      <figure id="id6100034">
+        <media id="id1170187464580" alt=""><image src="../../media/graphics3-5122.png" mime-type="image/png" height="182" width="345"/></media>
+      </figure>
+      <para id="id6100057">(Hình 6.4)</para>
+      <para id="id6100062">Hiển thị dòng ‘Matlab Experiments’ bên dưới axes: </para>
+      <list id="id6100094" list-type="bulleted">
+        <item>Nhập tiếp nội dung sau vào file giaodien.m</item>
+      </list>
+      <para id="id6100110">% --------------------------------------------------------------------------------</para>
+      <para id="id6100115">% text</para>
+      <para id="id6100120">txtpos=[10 50 425 50];</para>
+      <para id="id6100128">txt=uicontrol(...</para>
+      <para id="id6100135">'Style','text',...</para>
+      <para id="id6100144">'BackgroundColor',[0.8 0.8 0.8],...</para>
+      <para id="id6100155">'ForegroundColor',[0.4 0.5 0.3],...</para>
+      <para id="id6100163">'String','Matlab Experiments',...</para>
+      <para id="id6100172">'Position',txtpos,...</para>
+      <para id="id6100180">'Fontname','Courier',...</para>
+      <para id="id6100189">'FontWeight','Bold',...</para>
+      <para id="id6100198">'FontSize',26);</para>
+      <list id="id6100208" list-type="bulleted">
+        <item>Lưu và thi hành file này.</item>
+      </list>
+      <figure id="id6100221">
+        <media id="id1170197636918" alt=""><image src="../../media/graphics4-0e65.png" mime-type="image/png" height="241" width="311"/></media>
+      </figure>
+      <para id="id5824409">(Hình 6.5)</para>
+      <para id="id5824417">Tạo một frame có shadow bên phải figure để đặt các nút chức năng: </para>
+      <list id="id5824452" list-type="bulleted">
+        <item>Nhập tiếp nội dung sau vào file giaodien.m</item>
+      </list>
+      <para id="id5824468">% --------------------------------------------------------------------------------</para>
+      <para id="id5824476">% Console frames</para>
+      <para id="id5824483">p1=0.755; p2=0.05; p3=0.2; p4=0.90;</para>
+      <para id="id5824494">frm1pos = [p1 p2 p3 p4];</para>
+      <para id="id5824502">frm2pos = [p1-0.005 p2+0.005 p3 p4];</para>
+      <para id="id5824511">% shadow frame</para>
+      <para id="id5824517">frm1=uicontrol( ... </para>
+      <para id="id5824528">'Style','frame', ...</para>
+      <para id="id5824538">'Units','normalized', ...</para>
+      <para id="id5824548">'Position',frm1pos, ...</para>
+      <para id="id5824558">'ForegroundColor',[0.4 0.4 0.4],...</para>
+      <para id="id5824567">'BackgroundColor',[0.4 0.4 0.4]);</para>
+      <para id="id5824576">% main frame</para>
+      <para id="id5824583">frm2=uicontrol( ... </para>
+      <para id="id5824595">'Style','frame', ...</para>
+      <para id="id5824605">'Units','normalized', ...</para>
+      <para id="id5824614">'Position',frm2pos, ...</para>
+      <para id="id5824624">'ForegroundColor',[0.7 0.7 0.7],...</para>
+      <para id="id5824634">'BackgroundColor',[0.65 0.65 0.65]);</para>
+      <list id="id5824646" list-type="bulleted">
+        <item>Lưu và thi hành file này.</item>
+      </list>
+      <figure id="id5824660">
+        <media id="id2781040" alt=""><image src="../../media/graphics5-0b5e.png" mime-type="image/png" height="269" width="313"/></media>
+      </figure>
+      <para id="id5824683">(Hình 6.6)</para>
+      <para id="id5824688">Tạo nút ‘Close’ có chức năng đóng cửa sổ figure hiện hành:</para>
+      <list id="id5824712" list-type="bulleted">
+        <item>Nhập tiếp nội dung sau vào file giaodien.m</item>
+      </list>
+      <para id="id6088482">% ----------------------------------------------------------------------------------</para>
+      <para id="id6088493">% Close button</para>
+      <para id="id6088500">closeHndl=uicontrol(...</para>
+      <para id="id6088509">'Style','pushbutton', ...</para>
+      <para id="id6088518">'Units','normalized', ...</para>
+      <para id="id6088528">'Position',[p1+0.01 p2+0.05 p3-0.025 0.05], ...</para>
+      <para id="id6088539">'String','Close', ...</para>
+      <para id="id6088548">'Foregroundcolor','b',...</para>
+      <para id="id6088558">'Fontsize',9,...</para>
+      <para id="id6088568">'Callback','close');</para>
+      <list id="id6088578" list-type="bulleted">
+        <item>Lưu và thi hành file này.</item>
+      </list>
+      <para id="id6088588">Vấn đề quan trọng nhất đối với một nút chức năng là thi hành công việc tương ứng khi người sử dụng thao tác. Thuộc tính ‘CallBack’ cho phép: thi hành một lệnh của Matlab dưới dạng chuỗi (bao gồm lệnh gọi hàm, script file, biểu thức toán, …). Sinh viên thử thay lệnh close bằng một lệnh khác, chẳng hạn demos và quan sát đáp ứng. </para>
+      <para id="id6088635">Tạo nút Sphere để vẽ một hình cầu 3D:</para>
+      <list id="id6088658" list-type="bulleted">
+        <item>Nhập tiếp nội dung sau vào file giaodien.m</item>
+      </list>
+      <para id="id6088666">% ----------------------------------------------------------------------------------</para>
+      <para id="id6088674">% Sphere button</para>
+      <para id="id6088681">sph=uicontrol( ...</para>
+      <para id="id6088689">'Style','pushbutton', ...</para>
+      <para id="id6088696">'Units','normalized', ...</para>
+      <para id="id6088706">'Position',[p1+0.01 p4-0.05 p3-0.025 0.05], ...</para>
+      <para id="id6088716">'String','Sphere', ...</para>
+      <para id="id6088726">'Foregroundcolor','b',...</para>
+      <para id="id6088736">'Fontsize',9,...</para>
+      <para id="id6088746">'Callback',['[x,y,z]=sphere(35);', 'surfl(x,y,z);', 'axis equal']);</para>
+      <list id="id6088756" list-type="bulleted">
+        <item>Lưu và thi hành file này.</item>
+      </list>
+      <figure id="id6088770">
+        <media id="id5080287" alt=""><image src="../../media/graphics6-b7d4.png" mime-type="image/png" height="284" width="336"/></media>
+      </figure>
+      <para id="id6088794">(Hình 6.7)</para>
+      <para id="id6088798">Tạo nút Picture để hiển thị ảnh màu:</para>
+      <list id="id6707692" list-type="bulleted">
+        <item>Nhập tiếp nội dung sau vào file giaodien.m</item>
+      </list>
+      <para id="id6707700">% ----------------------------------------------------------------------------------</para>
+      <para id="id6707707">% Picture button</para>
+      <para id="id6707714">pic=uicontrol( ...</para>
+      <para id="id6707723">'Style','pushbutton', ...</para>
+      <para id="id6707730">'Units','normalized', ...</para>
+      <para id="id6707739">'Position',[p1+0.01 p4-0.125 p3-0.025 0.05], ...</para>
+      <para id="id6707750">'String','Picture', ...</para>
+      <para id="id6707760">'Foregroundcolor','b',...</para>
+      <para id="id6707769">'Fontsize',9,...</para>
+      <para id="id6707779">'Callback',['imshow(imread(''flowers.tif''))']);</para>
+      <list id="id6707789" list-type="bulleted">
+        <item>Lưu và thi hành file này.</item>
+      </list>
+      <figure id="id6707804">
+        <media id="id7296469" alt=""><image src="../../media/graphics7-4c8c.png" mime-type="image/png" height="246" width="291"/></media>
+      </figure>
+      <para id="id6707828">(Hình 6.8)</para>
+      <para id="id6707832">Sinh viên lưu ý cách biểu diễn nhiều lệnh ở dạng chuỗi cho ‘CallBack’. Trong trường hợp có quá nhiều lệnh phục vụ chức năng này, ta nên đưa chúng vào một script file hoặc một hàm khác. Ngoài ra, nếu ta tạo giao diện dưới dạng một hàm (function) thì thuộc tính ‘CallBack’ cho phép gọi một hàm con được viết ngay trong file này.</para>
+      <para id="id6707896">Sinh viên hãy tạo thêm nút ‘About’ sao cho khi người sử dụng ấn nút sẽ mở cửa sổ mới nằm ngay giữa màn hình 6.9.</para>
+      <figure id="id6707925">
+        <media id="id3183732" alt=""><image src="../../media/graphics8.png" mime-type="image/png" height="249" width="318"/></media>
+      </figure>
+      <para id="id6707949">(Hình 6.9)</para>
+    </section>
+    <section id="id-704398566464">
+      <title>TỰ chỌn</title>
+      <para id="id6707962">Sinh viên hãy xem một số file tạo giao diện demo của các toolbox trong Matlab chẳng hạn: graf3d.m trong \toolbox\matlab\demos, để tham khảo cách xây dựng giao diện theo dạng hàm. Với cách này, thuộc tính ‘CallBack’ trong ‘uicontrol’ cho phép gọi trực tiếp một hàm mà hàm đó được xây dựng ngay trong file giao diện (nghĩa là không cần tạo một file *.m khác phục vụ cho ‘CallBack’). </para>
+      <para id="id5753339">Thử sửa lại giao diện của bài thí nghiệm này theo dạng trên.</para>
+    </section>
+  </content>
+</document>

@@ -1,0 +1,140 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:md="http://cnx.rice.edu/mdml">
+  <title>Mô hình hệ thống viễn thông</title>
+  <metadata>
+  <md:content-id>m30678</md:content-id><md:title>Mô hình hệ thống viễn thông</md:title>
+  <md:abstract>Đây là giáo trình về mô hình hệ thống viễn thông</md:abstract>
+  <md:uuid>adcc98ec-56f3-42f8-ada8-5c01bd053426</md:uuid>
+</metadata>
+
+<content>
+    <section id="id-829017629912">
+      <title>MỤc tiêu</title>
+      <para id="id6126877">Bài thí nghiệm này tìm hiểu phương pháp mô hình hóa một hệ thống thông tin đơn giản như hình 4.1:</para>
+      <para id="id6126889">
+        ***SORRY, THIS MEDIA TYPE IS NOT SUPPORTED.***
+      </para>
+      <para id="id6126915">Hình 4.1 - Một mô hình truyền tin tiêu biểu</para>
+      <para id="id6126923">Chúng ta sẽ xử lý tín hiệu nguồn (mã hóa, kiểm soát lỗi, điều chế) và truyền qua một kênh truyền có nhiễu sau đó khôi phục tín hiệu nhận được (giải điều chế, giải mã) và xác định xác suất lỗi tín hiệu.</para>
+    </section>
+    <section id="id-937539315922">
+      <title>Tham khẢo</title>
+      <para id="id6126084">[1].The Mathworks Inc., Matlab User’s Guide – Communications Toolbox, 2003.</para>
+      <para id="id6126092">[2].Nguyễn Hữu Tình - Lê Tấn Hùng - Phạm Thị Ngọc Yến - Nguyễn Thị Lan Hương, Cơ sở Matlab &amp; ứng dụng, NXB KH và Kỹ thuật, 1999.</para>
+      <para id="id6126105">[3].<link url="http://murray.newcastle.edu.au/uers/staff/eemf/ELEC352/notes.htm">http://murray.newcastle.edu.au/uers/staff/eemf/ELEC352/notes.htm</link></para>
+    </section>
+    <section id="id-821059219453">
+      <title>ThỰc hành</title>
+      <para id="id6126138">Để có thể thực tập tốt bài thí nghiệm, sinh viên cần có kiến thức về Xử lý số tín hiệu (Digital Signal Processing), Truyền dữ liệu (Data transmittion) và Cơ sở Viễn thông. Do đó, bài thí nghiệm này không bắt buộc đối với sinh viên chuyên ngành Tin học (nếu có) và sinh viên Điện tử hướng ĐKTĐ. Trong trường hợp đó, sinh viên có thể chọn bài 5 hoặc bài 7 để thực tập.</para>
+      <para id="id6126207">Xây dựng mô hình hệ thống thông tin nói chung là một việc rất lớn, với nhiều vấn đề cần giải quyết. Do đó trong phạm vi bài thí nghiệm này chúng ta chỉ có thể khảo sát một số khâu trong tổng thể của một hệ thống truyền thông.</para>
+      <section id="id-616747705057">
+        <title>Hệ thống thông tin liên tục (Analog Communications)</title>
+        <para id="id5784898">Trong phần này chúng ta sẽ tìm hiểu các phương pháp điều chế và giải điều chế tín hiệu liên tục (Analog Modulation and Demodulation).</para>
+        <para id="id5784911">Điều chế biên độ sóng mang bị nén hai băng cạnh (Double-Sideband Suppressed Carrier Amplitude Modulation – DSB-SC): Phương pháp điều chế này dựa theo công thức sau:</para>
+        <para id="id5784936">y(t) = m(t)cos(2fct+c)</para>
+        <para id="id5784973">Trong đó: m(t) là tín hiệu hạ tần (thông tin) dùng để điều chế sóng mang tần số cao c(t) = cos(2fct+c) để thu được tín hiệu điều chế y(t).</para>
+        <para id="id5785016">
+        ***SORRY, THIS MEDIA TYPE IS NOT SUPPORTED.***
+      </para>
+        <para id="id5785042">Hình 4.2 – Nguyên tắc điều chế biên độ</para>
+        <para id="id6141186">Ta có thể thực hiện phương pháp điều chế này trong Matlab như sau (sinh viên nên ghi trong file .m để thuận tiện cho việc sử dụng lại ở các câu sau):</para>
+        <para id="id6141209">&gt;&gt;Fc=10;% tần số sóng mang [Hz]</para>
+        <para id="id6141216">&gt;&gt;Fs=60;% tần số lấy mẫu để mô phỏng </para>
+        <para id="id6141225">&gt;&gt;Fm=1; % tần số tín hiệu hạ tần </para>
+        <para id="id6141233">&gt;&gt;t=[0:1/Fs:3];% time window </para>
+        <para id="id6141240">&gt;&gt;c=cos(2*pi*Fc*t);% tín hiệu sóng mang </para>
+        <para id="id6141248">&gt;&gt;m=sin(2*pi*Fm*t);% tin hiệu hạ tần 1Hz </para>
+        <para id="id6141256">&gt;&gt;subplot(311), plot(t,m)% vẽ tín hiệu hạ tần </para>
+        <para id="id6141265">&gt;&gt;subplot(312), plot(t,c)% vẽ sóng mang</para>
+        <para id="id6141273">&gt;&gt;y=m.*c;% điều chế</para>
+        <para id="id6141280">&gt;&gt;subplot(312), plot(t,y)% vẽ tín hiệu điều chế</para>
+        <para id="id6141292">&gt;&gt;z=abs(fft(y));% phổ tín hiệu điều chế</para>
+        <para id="id6141300">&gt;&gt;z=z(1:length(z)/2+1);% lấy 1/2</para>
+        <para id="id6141308">&gt;&gt;frq=[0:length(z)-1]*Fs/length(z)/2;% frequency window </para>
+        <para id="id6141319">&gt;&gt;figure% new figure</para>
+        <para id="id6141327">&gt;&gt;plot(frq,z);% vẽ phổ</para>
+        <para id="id6141335"> Sinh viên hãy quan sát phổ tín hiệu điều chế, và hãy so sánh với tần số sóng mang.</para>
+        <para id="id6097670"> Thử dùng hàm amod của Communications toolbox thực hiện công việc trên.</para>
+        <para id="id6097693">&gt;&gt;help amod</para>
+        <para id="id6097701">&gt;&gt;Y=amod(m, Fc, Fs, 'amdsb-sc');% điều chế</para>
+        <para id="id6097710">&gt;&gt;subplot(313),plot(t,Y)</para>
+        <figure id="id6097719">
+          <media id="id7632077" alt=""><image src="graphics1.wmf" mime-type="image/wmf" height="225" width="505"/></media>
+        </figure>
+        <para id="id6097742">Hình 4.3 – Tín hiệu điều chế biên độ</para>
+        <para id="id6097748"> Tương tự như trên, sinh viên hãy thực hiện điều chế biên độ sóng mang bị nén đơn băng cạnh (Single-Sideband Suppressed Carrier Amplitude Modu-lation – SSB-SC). So sánh với phương pháp điều chế biên độ DSB-SC.</para>
+        <para id="id6097776">Giải điều chế biên độ: Có nhiều phương pháp giải điều chế biên độ. Ở đây ta xét phương pháp giải điều chế đồng bộ (Synchronous Demodulation), áp dụng cho phương pháp điều chế biên độ với sóng mang bị nén SC (Suppressed Carrier) và phương pháp điều chế biên độ với sóng mang được truyền TC (Transmission Carrier), theo mô hình sau: </para>
+        <para id="id6097811">
+        ***SORRY, THIS MEDIA TYPE IS NOT SUPPORTED.***
+      </para>
+        <para id="id5767687">Hình 4.4 – Nguyên tắc giải điều chế biên độ</para>
+        <para id="id5767693">Thực hiện giải điều chế như sau (phải đảm bảo rằng tín hiệu điều chế y còn trong WorkSpace của Matlab):</para>
+        <para id="id5767705">&gt;&gt;y_mix=y.*c;                              % trộn tín hiệu điều chế với sóng mang </para>
+        <para id="id5767714">&gt;&gt;[num,den]=butter(3, (Fc/2)/(Fs/2));  % low-pass filter tần số cắt Fc/2</para>
+        <para id="id5767724">&gt;&gt;m_r=filter(num,den,y_mix);              % cho tín hiệu đã trộn qua bộ lọc</para>
+        <para id="id5767733">&gt;&gt;close all%</para>
+        <para id="id5767740">&gt;&gt;plot(t,m)% vẽ tín hiệu hạ tần ban đầu</para>
+        <para id="id5767748">&gt;&gt;hold on%</para>
+        <para id="id5767755">&gt;&gt;plot(t,m_r,'r')% vẽ tín hiệu hạ tần vừa hồi phục</para>
+        <para id="id5767764"> Giải thích vì sao ta dùng bộ lọc thông thấp với tần số cắt Fc/2.</para>
+        <para id="id5767778"> Sinh viên hãy quan sát và so sánh sự khác biệt giữa tín hiệu giải điều chế và tín hiệu hạ tần ban đầu. Giải thích.</para>
+        <para id="id5767795"> Thử dùng hàm ademod của Communications toolbox để giải điều chế: </para>
+        <para id="id5767826">&gt;&gt;help ademod</para>
+        <para id="id5767830">&gt;&gt;M_R=ademod(y,Fc,Fs,'amdsb-sc');% giải điều chế</para>
+        <para id="id5743003">&gt;&gt;plot(t,M_R,'g')</para>
+      </section>
+      <section id="id-970283268912">
+        <title>Hệ thống thông tin rời rạc (Digital Communications)</title>
+        <para id="id5743018">Trong phần này, chúng ta sẽ thực hiện mô hình một hệ thống truyền thông rời rạc như sơ đồ sau:</para>
+        <para id="id5743030">
+        ***SORRY, THIS MEDIA TYPE IS NOT SUPPORTED.***
+      </para>
+        <para id="id5743056">Hình 4.5 – Mô hình một hệ thống truyền tin rời rạc</para>
+        <para id="id5743063">Sinh viên cần đọc phần help của từng lệnh hiểu và biết cách sử dụng.</para>
+        <para id="id5743070">Tạo tín hiệu nguồn: </para>
+        <para id="id5743091">&gt;&gt;clear</para>
+        <para id="id5743096">&gt;&gt;close all</para>
+        <para id="id5743100">&gt;&gt;K=11;% chiều dài từ tin (message length)</para>
+        <para id="id5743112">&gt;&gt;msg=randint(K*2,1);% tạo tín hiệu nguồn (digital message)</para>
+        <para id="id5743122">&gt;&gt;subplot(411),stem(msg,’.’)% vẽ tín hiệu nguồn</para>
+        <para id="id5743130">&gt;&gt;ylabel(‘digital message’)</para>
+        <para id="id5743136">Mã hóa BCH:</para>
+        <para id="id5743152">&gt;&gt;N=15;%chiều dài từ mã (codeword length)</para>
+        <para id="id5743164">&gt;&gt;code = encode(msg,N,K,'bch');%mã hóa BCH</para>
+        <para id="id5743172">&gt;&gt;subplot(412), stem(code,’.’)</para>
+        <para id="id6097370">&gt;&gt;ylabel(‘BCH’)</para>
+        <para id="id6097374">Điều chế QASK: Sử dụng bộ điều chế số M-QASK với M=16 (sinh viên cần xem lại lý thuyết về bộ điều chế này)</para>
+        <para id="id6097398">&gt;&gt;M=16;% multiple number</para>
+        <para id="id6097409">&gt;&gt;Fd=1;% tốc độ nguồn tin</para>
+        <para id="id6097421">&gt;&gt;Fc=10;% tần số sóng mang</para>
+        <para id="id6097433">&gt;&gt;Fs=30;% tần số lấy mẫu</para>
+        <para id="id6097446">&gt;&gt;modu = dmod(code,Fc,Fd,Fs,'qask',M);% điều chế M-QASK</para>
+        <para id="id6097455">&gt;&gt;subplot(413),plot(modu)% vẽ tín hiệu điều chế</para>
+        <para id="id6097465">&gt;&gt;ylabel(‘QASK’)</para>
+        <para id="id6097469">Kênh truyền có nhiễu: Tín hiệu sau khi điều chế được truyền trên kênh truyền có nhiễu trắng Gaussian công suất 0.1W.</para>
+        <para id="id6097494">&gt;&gt;std_value=0.1;% cong suat nhieu</para>
+        <para id="id6097502">&gt;&gt;modu_noise = modu+randn(length(modu),1)std_value; % add noise</para>
+        <para id="id6097520">Giải điều chế QASK:</para>
+        <para id="id6097536">&gt;&gt;demo = ddemod(modu_noise,Fc,Fd,Fs,'qask', M);% giải điều chế</para>
+        <para id="id5768738">Giải mã BCH: </para>
+        <para id="id5768759">&gt;&gt;msg_r = decode(demo,N,K,'bch');% tín hiệu thu</para>
+        <para id="id5768768">&gt;&gt;subplot(414), stem(msg_r,’.’)% vẽ tín hiệu số thu được</para>
+        <para id="id5768782">&gt;&gt;ylabel(‘received message’)</para>
+        <figure id="id5768791">
+          <media id="id1170008422964" alt=""><image src="graphics2.wmf" mime-type="image/wmf" height="311" width="499"/></media>
+        </figure>
+        <para id="id5768815">Hình 4.6 – So sánh tín hiệu truyền/nhận</para>
+        <para id="id5768821">Xác định lỗi: </para>
+        <para id="id5768842">&gt;&gt;rate=biterr(msg,msg_r,M)</para>
+        <para id="id5768847">Sinh viên hãy dùng hàm channel của Communications toolbox để mô hình hóa kênh truyền ở bước . Lặp lại các quá trình giải điều chế và giải mã, so sánh kết quả (lưu ý: băng thông của kênh truyền phải đủ lớn).</para>
+      </section>
+    </section>
+    <section id="id-741931747451">
+      <title>TỰ chỌn</title>
+      <para id="id5768895">Thực hiện điều chế và giải điều chế tần số FM với Fm, Fc, Fs ở câu III.1..</para>
+      <para id="id5816330">Thực hiện mô hình Digital Communications như hình sau:</para>
+      <figure id="id5816348">
+        <media id="id1170018113242" alt=""><image src="../../media/graphics3-36c5.png" mime-type="image/png" height="108" width="555"/></media>
+      </figure>
+    </section>
+  </content>
+</document>

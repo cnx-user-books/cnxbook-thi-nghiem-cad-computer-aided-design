@@ -1,0 +1,667 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:md="http://cnx.rice.edu/mdml">
+  <title>symbolic và Simulink</title>
+  <metadata>
+  <md:content-id>m30705</md:content-id><md:title>symbolic và Simulink</md:title>
+  <md:abstract>Đây là giáo trình về symbolic và simulink</md:abstract>
+  <md:uuid>e926630d-86be-4803-afc7-83bf004b0297</md:uuid>
+</metadata>
+
+<content>
+    <section id="id-230359878165">
+      <title>MỤc tiêu</title>
+      <para id="id5779936">Hiểu một cách cơ bản về hai công cụ mạnh và hữu hiệu của Matlab, đó là Symbolic và Simulink, để từ đó sinh viên có thể tự mình phát huy các chức năng cao hơn của hai công cụ này trong tính toán và mô phỏng hệ thống.</para>
+    </section>
+    <section id="id-659085482668">
+      <title>Tham khẢo</title>
+      <para id="id5779978">[1].The Mathworks Inc., Matlab Notebook User’s Guide, 2003.</para>
+      <para id="id5779989">[2].Nguyễn Hoài Sơn - Đỗ Thanh Việt - Bùi Xuân Lâm, Ứng dụng MATLAB trong tính toán kỹ thuật, Tập 1, NXB ĐHQG Tp. HCM, 2000</para>
+      <para id="id5780004">[3]. Nguyễn Chí Ngôn, Bài thí nghiệm Kỹ thuật mô phỏng trong Điều khiển tự động, Bộ môn Viễn Thông &amp; Tự động hóa, khoa Công nghệ thông tin, Đại học Cần thơ, 2002.</para>
+      <para id="id5780016">[4].Nguyễn Công Định, Phân tích và tổng hợp các hệ thống điều khiển bằng máy tính, NXB Khoa học và Kỹ thuật, 2002.</para>
+      <para id="id5782123">[5].<link url="http://www-h.eng.cam.ac.uk/help/tpl/programs/Matlab/Symbolic.html">http://www-h.eng.cam.ac.uk/help/tpl/programs/Matlab/Symbolic.html</link></para>
+    </section>
+    <section id="id-765342978962">
+      <title>ThỰc hành</title>
+      <para id="id5782157">Symbolic và Simulink đều chứa thư viện chức năng rất phong phú, bài thí nghiệm này chỉ có thể đề cập đến những gì gọi là cơ bản nhất. Từ đó, sinh viên có thể tự mình nghiên cứu và phát triển tiếp.</para>
+      <section id="id-681321978772">
+        <title>Symbolic</title>
+        <para id="id5782193">Phiên bản mới nhất của Symbolic toolbox được Mathworks giới thiệu trong Matlab 6.5 vào tháng 6-2003. Đó là một thư viện toán học kiểu ký tự, được phát triển từ Symbolic Maple của trường Đại học Waterloo, Canada. Để có cái nhìn tổng quát về các chức năng của Symbolic, sinh viên hãy gõ:</para>
+        <para id="id5782211">&gt;&gt;help symbolic</para>
+        <para id="id5782216">Một số hàm thông dụng của Symbolic: </para>
+        <table id="id5782222" summary="">
+          <tgroup cols="4">
+            <colspec colnum="1" colname="c1"/>
+            <colspec colnum="2" colname="c2"/>
+            <colspec colnum="3" colname="c3"/>
+            <colspec colnum="4" colname="c4"/>
+            <tbody>
+              <row>
+                <entry>Tên hàm</entry>
+                <entry>Chức năng</entry>
+                <entry>Tên hàm</entry>
+                <entry>Chức năng</entry>
+              </row>
+              <row>
+                <entry>diff</entry>
+                <entry>Đạo hàm</entry>
+                <entry>fourier</entry>
+                <entry>Biến đổi Fourier</entry>
+              </row>
+              <row>
+                <entry>int</entry>
+                <entry>Tích phân </entry>
+                <entry>ifourier</entry>
+                <entry>Biến đổi Fourier ngược</entry>
+              </row>
+              <row>
+                <entry>taylor</entry>
+                <entry>Khai triển Taylor</entry>
+                <entry>laplace</entry>
+                <entry>Biến đổi Laplace </entry>
+              </row>
+              <row>
+                <entry>det</entry>
+                <entry>Định thức của ma trận</entry>
+                <entry>laplace</entry>
+                <entry>Biến đổi Laplace ngược</entry>
+              </row>
+              <row>
+                <entry>numden</entry>
+                <entry>Tử và mẫu của phân số</entry>
+                <entry>ezplot</entry>
+                <entry>Vẽ hàm,  plot</entry>
+              </row>
+              <row>
+                <entry>subs</entry>
+                <entry>Thay biến sym bằng trị số</entry>
+                <entry>ezpolar</entry>
+                <entry>Vẽ hàm, tọa độ cực  polar</entry>
+              </row>
+              <row>
+                <entry>dsolve</entry>
+                <entry>Giải phương trình vi phân</entry>
+                <entry>ezmesh</entry>
+                <entry>Vẽ mặt lưới  mesh</entry>
+              </row>
+              <row>
+                <entry>solve</entry>
+                <entry>Giải phương trình đại số</entry>
+                <entry>ezsurf</entry>
+                <entry>Vẽ mặt  surf</entry>
+              </row>
+            </tbody>
+          </tgroup>
+        </table>
+        <para id="id5761845">Để biến đổi một số, một biến hay một đối tượng nào đó thành kiểu Symbolic ta có thể sử dụng một trong các cách sau:</para>
+        <para id="id5761864">&gt;&gt;s=sym(A)</para>
+        <para id="id5761869">&gt;&gt;x=sym(x)</para>
+        <para id="id5761874">&gt;&gt;syms x y z% khai báo kết hợp  x, y và z là biến symbolic</para>
+        <para id="id5761895">Tính đạo hàm bằng hàm diff của symbolic: Nếu S là biểu thức symbolic thì:</para>
+        <para id="id5761920">diff(S)đạo hàm của S theo biến tự do</para>
+        <para id="id5761934">diff(S,’v’)đạo hàm của S theo biến v</para>
+        <para id="id5761948">diff(S,’v’,n)đạo hàm cấp n của S theo v.</para>
+        <para id="id5761961">Ví dụ: Tính đạo hàm của y = sinx3.</para>
+        <para id="id5761978">&gt;&gt; syms x% khai bao x la bien kieu symbolic</para>
+        <para id="id5761987">&gt;&gt; y=sin(x^3);</para>
+        <para id="id5761992">&gt;&gt; z=diff(y)% dao ham cua y</para>
+        <para id="id5762002"> z =</para>
+        <para id="id5762010">3*cos(x^3)*x^2% sinh vien kiem tra ket qua</para>
+        <para id="id5762020">&gt;&gt;pretty(z)% hien thi dang quen thuoc</para>
+        <para id="id5762029">3 cos(x3) x2</para>
+        <para id="id5762057">&gt;&gt;ezplot(x,y)% ve y theo x</para>
+        <figure id="id5665564">
+          <media id="id15917668" alt=""><image src="graphics1.wmf" mime-type="image/wmf" height="178" width="389"/></media>
+        </figure>
+        <para id="id5665587">Hình 3.1 – Vẽ đồ thị hàm symbolic</para>
+        <para id="id5665594">Tính vi phân bằng hàm int - Nếu S là biểu thức Symbolic thì:</para>
+        <para id="id5665618">int(S)tích phân không xác định của S theo biến mặc nhiên (muốn biết biến mặc nhiên này ta dùng hàm findsym).</para>
+        <para id="id5665643">int(S,v)tích phân không xác định của S theo v.</para>
+        <para id="id5665658">int(S,a,b)tích phân xác định của S trên cận [a,b]</para>
+        <para id="id5665672">int(S,v,a,b)tích phân xác định của S theo v trên cận [a,b]</para>
+        <para id="id5665687">Ví dụ: Tính 
+<m:math><m:semantics><m:mrow><m:mstyle fontsize="12pt"><m:mrow><m:mrow><m:mrow><m:munderover><m:mo stretchy="false">∫</m:mo><m:mstyle fontsize="8pt"><m:mrow><m:mn>0</m:mn></m:mrow></m:mstyle><m:mstyle fontsize="8pt"><m:mrow><m:mn>1</m:mn></m:mrow></m:mstyle></m:munderover><m:mfrac><m:mrow><m:msup><m:mn>2x</m:mn><m:mstyle fontsize="8pt"><m:mrow><m:mn>2</m:mn></m:mrow></m:mstyle></m:msup><m:mfenced open="" close=""><m:mrow><m:mrow><m:mtext>19</m:mtext><m:mo stretchy="false">+</m:mo><m:mtext>12</m:mtext></m:mrow><m:msup><m:mi>x</m:mi><m:mstyle fontsize="8pt"><m:mrow><m:mn>2</m:mn></m:mrow></m:mstyle></m:msup></m:mrow></m:mfenced></m:mrow><m:mrow><m:mn>7</m:mn><m:mfenced open="" close=""><m:mrow><m:msup><m:mi>x</m:mi><m:mstyle fontsize="8pt"><m:mrow><m:mn>2</m:mn></m:mrow></m:mstyle></m:msup><m:mo stretchy="false">+</m:mo><m:mn>1</m:mn></m:mrow></m:mfenced></m:mrow></m:mfrac></m:mrow><m:mstyle fontstyle="italic"><m:mrow><m:mtext>dx</m:mtext></m:mrow></m:mstyle></m:mrow></m:mrow></m:mstyle><m:mrow/></m:mrow><m:annotation encoding="StarMath 5.0"> size 12{ Int cSub { size 8{0} }  cSup { size 8{1} }  { {  {2x rSup { size 8{2} }  left ("19"+"12"x rSup { size 8{2} }  right )}  over  {7 left (x rSup { size 8{2} } +1 right )} } }  ital "dx"} {}</m:annotation></m:semantics></m:math></para>
+        <para id="id5745084">&gt;&gt;syms x</para>
+        <para id="id5745088">&gt;&gt;S=2*x^2*(19+12*x^2)/(7*(x^2+1))</para>
+        <para id="id5745100">&gt;&gt;y=int(S,x,0,1)% tích phân S theo x trên cận [0,1]</para>
+        <para id="id5745117">&gt;&gt;subs(y)% đổi sang kiểu số</para>
+        <para id="id5745127">Giải hệ phương trình bằng hàm solve:</para>
+        <para id="id5745146">&gt;&gt;help solve</para>
+        <para id="id5745150">&gt;&gt;syms x y </para>
+        <para id="id5745157">&gt;&gt;[x,y]= solve('x^2*sin(x^2)-3*y=7','x+y=1')</para>
+        <para id="id5745163">Sau khi thu được nghiệm x và y, sinh viên hãy thay vào 2 phương trình trên và nhận xét kết quả.</para>
+        <para id="id5745174">Vẽ mặt 3D bằng hàm ezsurf: Ví dụ vẽ mặt 
+<m:math><m:semantics><m:mrow><m:mstyle fontsize="12pt"><m:mrow><m:mrow><m:mrow><m:mi>S</m:mi><m:mo stretchy="false">=</m:mo><m:mi>f</m:mi></m:mrow><m:mo stretchy="false">(</m:mo><m:mi>x</m:mi><m:mi>,</m:mi><m:mi>y</m:mi><m:mrow><m:mo stretchy="false">)</m:mo><m:mo stretchy="false">=</m:mo><m:mfrac><m:mi>y</m:mi><m:mrow><m:mrow><m:mn>1</m:mn><m:mo stretchy="false">+</m:mo><m:msup><m:mi>x</m:mi><m:mstyle fontsize="8pt"><m:mrow><m:mn>2</m:mn></m:mrow></m:mstyle></m:msup></m:mrow><m:mo stretchy="false">+</m:mo><m:msup><m:mi>y</m:mi><m:mstyle fontsize="8pt"><m:mrow><m:mn>2</m:mn></m:mrow></m:mstyle></m:msup></m:mrow></m:mfrac></m:mrow></m:mrow></m:mrow></m:mstyle><m:mrow/></m:mrow><m:annotation encoding="StarMath 5.0"> size 12{S=f \( x,y \) = {  {y}  over  {1+x rSup { size 8{2} } +y rSup { size 8{2} } } } } {}</m:annotation></m:semantics></m:math> trên miền xác định: -5&lt;x&lt;5; -2&lt;y&lt;2.</para>
+        <para id="id5745332">&gt;&gt;syms x y</para>
+        <para id="id5745336">&gt;&gt;S=y/(1+x^2+y^2)</para>
+        <para id="id5745341">&gt;&gt;ezsurf(S, [-5 5 –2*pi 2*pi])</para>
+        <figure id="id5745352">
+          <media id="id15972633" alt=""><image src="../../media/graphics2-e920.png" mime-type="image/png" height="268" width="340"/></media>
+        </figure>
+        <para id="id5652259">Hình 3.2 – Vẽ đồ thị 3D cho hàm số symbolic</para>
+      </section>
+      <section id="id-545469268983">
+        <title>Simulink</title>
+        <para id="id5652272">Simulink 5.0 (Simulation and Link - R13) được MatWorks giới thiệu vào tháng 6 năm 2003. Nó cho phép phân tích, mô hình hóa và mô phỏng các hệ thống động tuyến tính và phi tuyến, liên tục và rời rạc một cách trực quan trong môi trường giao tiếp đồ họa, bằng các thao tác chuột đơn giản. Có thể nói, không tận dụng được Simulink là một thiệt thòi lớn cho người làm công tác mô phỏng!</para>
+        <para id="id5652291">Khởi động Simulink bằng một trong các cách sau:</para>
+        <para id="id5652298">nhập: &gt;&gt;simulink</para>
+        <para id="id5652303">hoặc nhấp chuột vào <!--Sorry, this media type is not supported.--> trên menubar của Matlab</para>
+        <para id="id5652343">Thư viện simulink hiện ra như hình 3.3:</para>
+        <para id="id5652352">Trước tiên, sinh viên hãy nhấp chuột vào các thanh cuộn của thư viện để có cái nhìn thân thiện về simulink.</para>
+        <para id="id5652364">Từ đây, để có thể tạo mô hình bằng simulink, hãy:</para>
+        <list id="id5652371" list-type="bulleted">
+          <item>nhấp chuột vào biểu tượng <!--Sorry, this media type is not supported.--> của thư viện simulink</item>
+          <item>chọn: File – New – Model trong Menu của thư viện Simulink</item>
+          <item>chọn: File – New – Model trong cửa sổ lệnh của Matlab</item>
+        </list>
+        <figure id="id5652434">
+          <media id="id15946930" alt=""><image src="../../media/graphics3-faa4.png" mime-type="image/png" height="273" width="445"/></media>
+        </figure>
+        <para id="id5652458">Hình 3.3 – Cửa sổ chính của thư viện Simulink</para>
+        <figure id="id5652468">
+          <media id="id15946978" alt=""><image src="../../media/graphics4-027d.png" mime-type="image/png" height="175" width="529"/></media>
+        </figure>
+        <para id="id5652492">Hình 3.4 – Môi trường soạn thảo của Simulink</para>
+        <para id="id5652498">Cửa sổ này (hình 3.4) cho phép ta ‘nhấp - kéo - thả’ vào từng khối chức năng trong thư viện simulink. Ví dụ, đặt vào đây khối ‘Sine Wave’ trong thư viện <!--Sorry, this media type is not supported.--> của <!--Sorry, this media type is not supported.-->(hình 3.5):</para>
+        <para id="id5670049">
+          <media id="id15947053" alt=""><image src="../../media/graphics5-2391.png" mime-type="image/png" height="269" width="277"/></media>
+          <media id="id15947078" alt=""><image src="../../media/graphics6-98b9.png" mime-type="image/png" height="269" width="185"/></media>
+        </para>
+        <para id="id5670110">Hình 3.5 – Lấy một khối từ thư viện</para>
+        <para id="id5670116">Sau khi đặt tất cả các khối cần thiết của mô hình, ta nối chúng lại bằng cách ‘nhấp - giữ’ và kéo một đường từ ngõ ra của khối này đến ngõ vào của khối khác rồi thả phím trái chuột, một kết nối sẽ được thiết lập.</para>
+        <para id="id5670133">Xây dựng mô hình hệ thống xe tải: </para>
+        <figure id="id5670151">
+          <media id="id15947160" alt=""><image src="../../media/graphics7-78ef.png" mime-type="image/png" height="177" width="354"/></media>
+        </figure>
+        <para id="id5670174">Hình 3.6 – Mô hình xe tải</para>
+        <para id="id5670180">cho bởi phương trình: 
+<m:math><m:semantics><m:mrow><m:mstyle fontsize="12pt"><m:mrow><m:mrow><m:mi>m</m:mi><m:mrow><m:mfrac><m:mstyle fontstyle="italic"><m:mrow><m:mtext>dv</m:mtext></m:mrow></m:mstyle><m:mstyle fontstyle="italic"><m:mrow><m:mtext>dt</m:mtext></m:mrow></m:mstyle></m:mfrac><m:mo stretchy="false">=</m:mo><m:mrow><m:mi>u</m:mi><m:mo stretchy="false">−</m:mo><m:mstyle fontstyle="italic"><m:mrow><m:mtext>bv</m:mtext></m:mrow></m:mstyle></m:mrow></m:mrow></m:mrow></m:mrow></m:mstyle><m:mrow/></m:mrow><m:annotation encoding="StarMath 5.0"> size 12{m {  { ital "dv"}  over  { ital "dt"} } =u -  ital "bv"} {}</m:annotation></m:semantics></m:math> hay 
+<m:math><m:semantics><m:mrow><m:mstyle fontsize="12pt"><m:mrow><m:mrow><m:mrow><m:mfrac><m:mtext>dv</m:mtext><m:mtext>dt</m:mtext></m:mfrac><m:mo stretchy="false">=</m:mo><m:mfrac><m:mn>1</m:mn><m:mi>m</m:mi></m:mfrac></m:mrow><m:mo stretchy="false">(</m:mo><m:mrow><m:mi>u</m:mi><m:mo stretchy="false">−</m:mo><m:mtext>bv</m:mtext></m:mrow><m:mo stretchy="false">)</m:mo></m:mrow></m:mrow></m:mstyle><m:mrow/></m:mrow><m:annotation encoding="StarMath 5.0"> size 12{ {  {"dv"}  over  {"dt"} } = {  {1}  over  {m} }  \( u - "bv" \) } {}</m:annotation></m:semantics></m:math>.</para>
+        <para id="id5701937">Trong đó m là khối lượng xe, u là lực tác động của động cơ (ngõ vào của mô hình), b là hệ số ma sát và v là vận tốc đạt được (ngõ ra của mô hình).</para>
+        <para id="id5701952">Xuất phát điểm của việc xây dựng các mô hình hệ thống từ các phương trình vi phân tương ứng là các khối tích phân (Integrator). Nếu trong phương trình mô tả hệ thống có vi phân bậc n thì ta sẽ đặt vào mô hình n khối tích phân, do quan hệ 
+<m:math><m:semantics><m:mrow><m:mstyle fontsize="12pt"><m:mrow><m:mrow><m:mrow><m:mo stretchy="false">∫</m:mo><m:mfrac><m:mtext>dv</m:mtext><m:mtext>dt</m:mtext></m:mfrac></m:mrow><m:mo stretchy="false">=</m:mo><m:mi>v</m:mi></m:mrow></m:mrow></m:mstyle><m:mrow/></m:mrow><m:annotation encoding="StarMath 5.0"> size 12{ Int { {  {"dv"}  over  {"dt"} } } =v} {}</m:annotation></m:semantics></m:math>.</para>
+        <list id="id5702054" list-type="bulleted">
+          <item>Mở một cửa sổ mô hình mới.</item>
+          <item>Đặt vào mô hình khối ‘Integrator’ từ thư viện ‘Continuous’ và kẻ các đường thẳng nối đến ngõ vào và ngõ ra của khối này.</item>
+          <item>Đặt nhãn ‘vdot’ (dv/dt) cho cho đường nối đến ngõ vào và ‘v’ cho đường nối đến ngõ ra bằng cách nhấp đúp chuột ngay phía trên các đường này.</item>
+        </list>
+        <figure id="id5702088">
+          <media id="id15947442" alt=""><image src="../../media/graphics8.jpg" mime-type="image/jpeg" height="57" width="129"/></media>
+        </figure>
+        <para id="id5702112">Từ phương trình hệ thống ta thấy dv/dt (vdot) bằng tích của thành phần (1/m) và thành phần tổng (u-bv), nên ta thêm khối 1/m ngay trước khối tích phân:</para>
+        <list id="id5702126" list-type="bulleted">
+          <item>Đặt vào khối ‘Gain’ trong thư viện <media id="id15986376" alt=""><image src="../../media/graphics9.jpg" mime-type="image/jpeg" height="18" width="50"/></media>.</item>
+          <item>Nhấp đúp chuột vào khối này để thay đổi độ lợi thành 1/m.</item>
+          <item>Đặt nhãn ‘inertia’ cho khối này để tượng trưng cho quán tính của xe (nhấp đúp vào nhãn ‘Gain’ bên dưới khối).</item>
+        </list>
+        <figure id="id5702189">
+          <media id="id15986431" alt=""><image src="../../media/graphics10.jpg" mime-type="image/jpeg" height="52" width="204"/></media>
+        </figure>
+        <para id="id5702213">Bây giờ ta đặt khối tổng với 2 ngõ vào ‘+-‘, ngõ vào ‘+’ sẽ được nối với u, ngõ vào ‘-’ sẽ được nối với thành phần bv để được (u-bv)</para>
+        <list id="id5820801" list-type="bulleted">
+          <item>Đặt vào khối ‘Sum’ trong thư viện <media id="id15986494" alt=""><image src="../../media/graphics11.jpg" mime-type="image/jpeg" height="18" width="50"/></media></item>
+          <item>Nhấp đúp vào khối này để đổi ngõ vào từ ‘++’ sang ‘+-’</item>
+        </list>
+        <para id="id5820846">
+        ***SORRY, THIS MEDIA TYPE IS NOT SUPPORTED.***
+      </para>
+        <para id="id5820872">Để được thành phần bv ta chỉ cần đặt thêm khối ‘Gain’ với độ lợi b:</para>
+        <list id="id5820882" list-type="bulleted">
+          <item>Đặt khối ‘Gain’ có độ lợi b</item>
+          <item>Đặt nhãn là ‘damping’ tượng trưng cho thành phần lực cản của xe.</item>
+        </list>
+        <para id="id5820898">
+        ***SORRY, THIS MEDIA TYPE IS NOT SUPPORTED.***
+      </para>
+        <para id="id5820924">Đến đây việc xây dựng mô hình xe tải với ngõ vào u và ngõ ra v coi như hoàn thành. Tuy nhiên, để mô phỏng mô hình này, ta cần đặt thêm khối ‘Step’ vào u và hiển thị v trên khối ‘Scope’</para>
+        <list id="id5820936" list-type="bulleted">
+          <item>Đặt khối ‘Step’ trong thư viện <!--Sorry, this media type is not supported.--> biên độ u ngay ngõ vào.</item>
+          <item>Đặt khối ‘Scope’ trong thư viện <media id="id15986643" alt=""><image src="../../media/graphics12.jpg" mime-type="image/jpeg" height="18" width="50"/></media> ngay ngõ ra v.</item>
+        </list>
+        <para id="id5821019">
+        ***SORRY, THIS MEDIA TYPE IS NOT SUPPORTED.***
+      </para>
+        <para id="id5821045">Nhớ rằng m, b và u là các biến cần được gán trị trước khi mô phỏng.</para>
+        <para id="id5821056">&gt;&gt;m=1000</para>
+        <para id="id5821061">&gt;&gt;b=50</para>
+        <para id="id5821065">&gt;&gt;u=500</para>
+        <para id="id5821070">Thời gian mô phỏng hệ thống tùy thuộc vào thông số ‘Stop time’ trong menu ‘SimulationSimulation paramrters’, giả sử đặt 120 (Hình 3.7).</para>
+        <para id="id5738593">Để chạy mô phỏng, ta có thể thực hiện bằng 1 trong các cách: </para>
+        <list id="id5738599" list-type="bulleted">
+          <item>nhấp chuột vào biểu tượng <!--Sorry, this media type is not supported.--> trên menubar của mô hình</item>
+          <item>chọn: Simulation  Start</item>
+          <item>Ctrl-T </item>
+        </list>
+        <para id="id5738664">Nhấp đúp vào ‘Scope’ để xem kết quả mô phỏng.</para>
+        <figure id="id5738685">
+          <media id="id15986824" alt=""><image src="../../media/graphics13.png" mime-type="image/png" height="355" width="415"/></media>
+        </figure>
+        <para id="id5738709">Hình 3.7 – Thay đổi thông số mô phỏng</para>
+        <para id="id5738715">Xây dựng mô hình hệ thống điều khiển vị trí motor DC cho bởi phương trình vi phân sau:</para>
+        <para id="id5738731">
+          <m:math>
+            <m:semantics>
+              <m:mrow>
+                <m:mstyle fontsize="12pt">
+                  <m:mrow>
+                    <m:mrow>
+                      <m:mrow>
+                        <m:mfrac>
+                          <m:mrow>
+                            <m:msup>
+                              <m:mi>d</m:mi>
+                              <m:mstyle fontsize="8pt">
+                                <m:mrow>
+                                  <m:mn>2</m:mn>
+                                </m:mrow>
+                              </m:mstyle>
+                            </m:msup>
+                            <m:mi>θ</m:mi>
+                          </m:mrow>
+                          <m:mstyle fontstyle="italic">
+                            <m:mrow>
+                              <m:msup>
+                                <m:mtext>dt</m:mtext>
+                                <m:mstyle fontsize="8pt">
+                                  <m:mrow>
+                                    <m:mn>2</m:mn>
+                                  </m:mrow>
+                                </m:mstyle>
+                              </m:msup>
+                            </m:mrow>
+                          </m:mstyle>
+                        </m:mfrac>
+                        <m:mo stretchy="false">=</m:mo>
+                        <m:mfrac>
+                          <m:mn>1</m:mn>
+                          <m:mi>J</m:mi>
+                        </m:mfrac>
+                      </m:mrow>
+                      <m:mfenced open="" close="">
+                        <m:mrow>
+                          <m:msub>
+                            <m:mi>K</m:mi>
+                            <m:mstyle fontsize="8pt">
+                              <m:mrow>
+                                <m:mi>t</m:mi>
+                              </m:mrow>
+                            </m:mstyle>
+                          </m:msub>
+                          <m:mrow>
+                            <m:mi>i</m:mi>
+                            <m:mo stretchy="false">−</m:mo>
+                            <m:mi>b</m:mi>
+                          </m:mrow>
+                          <m:mfrac>
+                            <m:mi fontstyle="italic">dθ</m:mi>
+                            <m:mstyle fontstyle="italic">
+                              <m:mrow>
+                                <m:mtext>dt</m:mtext>
+                              </m:mrow>
+                            </m:mstyle>
+                          </m:mfrac>
+                        </m:mrow>
+                      </m:mfenced>
+                    </m:mrow>
+                  </m:mrow>
+                </m:mstyle>
+                <m:mrow/>
+              </m:mrow>
+              <m:annotation encoding="StarMath 5.0"> size 12{ {  {d rSup { size 8{2} } θ}  over  { ital "dt" rSup { size 8{2} } } } = {  {1}  over  {J} }  left (K rSub { size 8{t} } i - b {  {dθ}  over  { ital "dt"} }  right )} {}</m:annotation>
+            </m:semantics>
+          </m:math>
+        </para>
+        <para id="id5738861">
+          <m:math>
+            <m:semantics>
+              <m:mrow>
+                <m:mstyle fontsize="12pt">
+                  <m:mrow>
+                    <m:mrow>
+                      <m:mrow>
+                        <m:mfrac>
+                          <m:mstyle fontstyle="italic">
+                            <m:mrow>
+                              <m:mtext>di</m:mtext>
+                            </m:mrow>
+                          </m:mstyle>
+                          <m:mstyle fontstyle="italic">
+                            <m:mrow>
+                              <m:mtext>dt</m:mtext>
+                            </m:mrow>
+                          </m:mstyle>
+                        </m:mfrac>
+                        <m:mo stretchy="false">=</m:mo>
+                        <m:mfrac>
+                          <m:mn>1</m:mn>
+                          <m:mi>L</m:mi>
+                        </m:mfrac>
+                      </m:mrow>
+                      <m:mfenced open="" close="">
+                        <m:mrow>
+                          <m:mrow>
+                            <m:mrow>
+                              <m:mrow>
+                                <m:mo stretchy="false">−</m:mo>
+                                <m:mstyle fontstyle="italic">
+                                  <m:mrow>
+                                    <m:mtext>Ri</m:mtext>
+                                  </m:mrow>
+                                </m:mstyle>
+                              </m:mrow>
+                              <m:mo stretchy="false">+</m:mo>
+                              <m:mi>V</m:mi>
+                            </m:mrow>
+                            <m:mo stretchy="false">−</m:mo>
+                            <m:msub>
+                              <m:mi>K</m:mi>
+                              <m:mstyle fontsize="8pt">
+                                <m:mrow>
+                                  <m:mi>e</m:mi>
+                                </m:mrow>
+                              </m:mstyle>
+                            </m:msub>
+                          </m:mrow>
+                          <m:mfrac>
+                            <m:mi fontstyle="italic">dθ</m:mi>
+                            <m:mstyle fontstyle="italic">
+                              <m:mrow>
+                                <m:mtext>dt</m:mtext>
+                              </m:mrow>
+                            </m:mstyle>
+                          </m:mfrac>
+                        </m:mrow>
+                      </m:mfenced>
+                    </m:mrow>
+                  </m:mrow>
+                </m:mstyle>
+                <m:mrow/>
+              </m:mrow>
+              <m:annotation encoding="StarMath 5.0"> size 12{ {  { ital "di"}  over  { ital "dt"} } = {  {1}  over  {L} }  left ( -  ital "Ri"+V - K rSub { size 8{e} }  {  {dθ}  over  { ital "dt"} }  right )} {}</m:annotation>
+            </m:semantics>
+          </m:math>
+        </para>
+        <para id="id5770911">Trong đó:</para>
+        <para id="id5770915">J = 0.01 Kgm2/s2 là moment quán tín của rotor</para>
+        <para id="id5770946">b = 0.1 Mms là hệ số ma sát của các bộ phận cơ khí</para>
+        <para id="id5770958">K = Ke = Kt = 0.01 Nm/A là hằng số sức điện động</para>
+        <para id="id5770986">R = 10 ohm là điện trở dây quấn</para>
+        <para id="id5770994">L = 0.5 H là hệ số tự cảm</para>
+        <para id="id5771002">V là điện áp đặt lên cuộn dây của motor</para>
+        <para id="id5771010"> là vị trí trục quay (ngõ ra của mô hình)</para>
+        <para id="id5771026">i là dòng điện chạy trong cuộn dây của motor.</para>
+        <para id="id5771034">
+          <media id="id15987373" alt=""><image src="../../media/graphics14.jpg" mime-type="image/jpeg" height="96" width="150"/></media>
+          <media id="id15987398" alt=""><image src="../../media/graphics15.jpg" mime-type="image/jpeg" height="135" width="360"/></media>
+        </para>
+        <para id="id5771096">Hình 3.8 – Mô hình toán hệ điều khiển vị trí motor DC</para>
+        <para id="id5771103">Quan sát từng phương trình mô tả hệ thống ta thấy cấu trúc của chúng cũng tương tự như phương trình của câu . Sinh viên lần lượt thực hiện trên từng phương trình để được (hình 3.9):</para>
+        <figure id="id5771130">
+          <media id="id15987467" alt=""><image src="../../media/graphics16.jpg" mime-type="image/jpeg" height="225" width="299"/></media>
+        </figure>
+        <para id="id5771154">(Hình 3.9)</para>
+        <para id="id5771159">Kết hợp 2 phương trình:</para>
+        <figure id="id5771170">
+          <media id="id15987526" alt=""><image src="../../media/graphics17.jpg" mime-type="image/jpeg" height="275" width="416"/></media>
+        </figure>
+        <para id="id5771194">(Hình 3.10)</para>
+        <para id="id5780021">Đặt vào mô hình khối ‘Step’ để làm tín hiệu tham khảo, khối ‘Scope’ để quan sát đáp ứng. Sinh viên hãy gán trị cho tất cả các thông số của mô hình, thực hiện mô phỏng và quan sát đáp ứng (Hình 3.11).</para>
+        <para id="id5780030">Hãy thay đổi ngõ vào mô hình bằng khối tạo xung vuông. Mô phỏng, quan sát kết quả và nhận xét.</para>
+      </section>
+    </section>
+    <section id="id-558665207003">
+      <title>TỰ chỌn</title>
+      <para id="id5780059">Sinh viên hãy tính đạo hàm cấp 2 của hàm
+<m:math><m:semantics><m:mrow><m:mstyle fontsize="12pt"><m:mrow><m:mrow><m:mi>y</m:mi><m:mo stretchy="false">=</m:mo><m:mstyle fontstyle="italic"><m:mrow><m:msup><m:mtext>xe</m:mtext><m:mstyle fontsize="8pt"><m:mrow><m:mfenced open="" close=""><m:mrow><m:mn>1</m:mn><m:mo stretchy="false">−</m:mo><m:msup><m:mi>x</m:mi><m:mstyle fontsize="6pt"><m:mrow><m:mn>2</m:mn></m:mrow></m:mstyle></m:msup></m:mrow></m:mfenced></m:mrow></m:mstyle></m:msup></m:mrow></m:mstyle></m:mrow></m:mrow></m:mstyle><m:mrow/></m:mrow><m:annotation encoding="StarMath 5.0"> size 12{y= ital "xe" rSup { size 8{ left (1 - x rSup { size 6{2} }  right )} } } {}</m:annotation></m:semantics></m:math> bằng tay và kiểm chứng kết quả bằng symbolic.</para>
+      <para id="id5780177">Tính tích phân sau và kiểm chứng kết quả bằng symbolic: 
+<m:math><m:semantics><m:mrow><m:mstyle fontsize="12pt"><m:mrow><m:mrow><m:munderover><m:mo stretchy="false">∫</m:mo><m:mn>0</m:mn><m:mo stretchy="false">∞</m:mo></m:munderover><m:msup><m:mi>e</m:mi><m:mstyle fontsize="8pt"><m:mrow><m:mrow><m:mo stretchy="false">−</m:mo><m:msup><m:mi>x</m:mi><m:mstyle fontsize="6pt"><m:mrow><m:mn>2</m:mn></m:mrow></m:mstyle></m:msup></m:mrow></m:mrow></m:mstyle></m:msup></m:mrow></m:mrow></m:mstyle><m:mrow/></m:mrow><m:annotation encoding="StarMath 5.0"> size 12{ Int cSub {0}  cSup { infinity }  {e rSup { size 8{ - x rSup { size 6{2} } } } } } {}</m:annotation></m:semantics></m:math></para>
+      <figure id="id5780275">
+        <media id="id15987764" alt=""><image src="../../media/graphics18.png" mime-type="image/png" height="348" width="485"/></media>
+      </figure>
+      <para id="id5780299">Hình 3.11 - Mô hình Simulink hoàn chỉnh của hệ điều khiển vị trí motor DC</para>
+      <para id="id5780307">Xây dựng mô hình hệ thống xe lửa cho bởi phương trình:</para>
+      <para id="id5780322">
+        <m:math>
+          <m:semantics>
+            <m:mrow>
+              <m:mstyle fontsize="12pt">
+                <m:mrow>
+                  <m:mrow>
+                    <m:msub>
+                      <m:mi>M</m:mi>
+                      <m:mstyle fontsize="8pt">
+                        <m:mrow>
+                          <m:mn>1</m:mn>
+                        </m:mrow>
+                      </m:mstyle>
+                    </m:msub>
+                    <m:mrow>
+                      <m:mfrac>
+                        <m:mrow>
+                          <m:msup>
+                            <m:mi>d</m:mi>
+                            <m:mstyle fontsize="8pt">
+                              <m:mrow>
+                                <m:mn>2</m:mn>
+                              </m:mrow>
+                            </m:mstyle>
+                          </m:msup>
+                          <m:msub>
+                            <m:mi>x</m:mi>
+                            <m:mstyle fontsize="8pt">
+                              <m:mrow>
+                                <m:mn>1</m:mn>
+                              </m:mrow>
+                            </m:mstyle>
+                          </m:msub>
+                        </m:mrow>
+                        <m:mstyle fontstyle="italic">
+                          <m:mrow>
+                            <m:msup>
+                              <m:mtext>dt</m:mtext>
+                              <m:mstyle fontsize="8pt">
+                                <m:mrow>
+                                  <m:mn>2</m:mn>
+                                </m:mrow>
+                              </m:mstyle>
+                            </m:msup>
+                          </m:mrow>
+                        </m:mstyle>
+                      </m:mfrac>
+                      <m:mo stretchy="false">=</m:mo>
+                      <m:mrow>
+                        <m:mi>F</m:mi>
+                        <m:mo stretchy="false">−</m:mo>
+                        <m:mi>k</m:mi>
+                      </m:mrow>
+                    </m:mrow>
+                    <m:mo stretchy="false">(</m:mo>
+                    <m:mrow>
+                      <m:msub>
+                        <m:mi>x</m:mi>
+                        <m:mstyle fontsize="8pt">
+                          <m:mrow>
+                            <m:mn>1</m:mn>
+                          </m:mrow>
+                        </m:mstyle>
+                      </m:msub>
+                      <m:mo stretchy="false">−</m:mo>
+                      <m:msub>
+                        <m:mi>x</m:mi>
+                        <m:mstyle fontsize="8pt">
+                          <m:mrow>
+                            <m:mn>2</m:mn>
+                          </m:mrow>
+                        </m:mstyle>
+                      </m:msub>
+                    </m:mrow>
+                    <m:mrow>
+                      <m:mo stretchy="false">)</m:mo>
+                      <m:mo stretchy="false">−</m:mo>
+                      <m:msub>
+                        <m:mi fontstyle="italic">μM</m:mi>
+                        <m:mstyle fontsize="8pt">
+                          <m:mrow>
+                            <m:mn>1</m:mn>
+                          </m:mrow>
+                        </m:mstyle>
+                      </m:msub>
+                    </m:mrow>
+                    <m:mi>g</m:mi>
+                    <m:mfrac>
+                      <m:mstyle fontstyle="italic">
+                        <m:mrow>
+                          <m:msub>
+                            <m:mtext>dx</m:mtext>
+                            <m:mstyle fontsize="8pt">
+                              <m:mrow>
+                                <m:mn>1</m:mn>
+                              </m:mrow>
+                            </m:mstyle>
+                          </m:msub>
+                        </m:mrow>
+                      </m:mstyle>
+                      <m:mstyle fontstyle="italic">
+                        <m:mrow>
+                          <m:mtext>dt</m:mtext>
+                        </m:mrow>
+                      </m:mstyle>
+                    </m:mfrac>
+                  </m:mrow>
+                </m:mrow>
+              </m:mstyle>
+              <m:mrow/>
+            </m:mrow>
+            <m:annotation encoding="StarMath 5.0"> size 12{M rSub { size 8{1} }  {  {d rSup { size 8{2} } x rSub { size 8{1} } }  over  { ital "dt" rSup { size 8{2} } } } =F - k \( x rSub { size 8{1} }  - x rSub { size 8{2} }  \)  - μM rSub { size 8{1} } g {  { ital "dx" rSub { size 8{1} } }  over  { ital "dt"} } } {}</m:annotation>
+          </m:semantics>
+        </m:math>
+      </para>
+      <para id="id5738359">
+        <m:math>
+          <m:semantics>
+            <m:mrow>
+              <m:mstyle fontsize="12pt">
+                <m:mrow>
+                  <m:mrow>
+                    <m:msub>
+                      <m:mi>M</m:mi>
+                      <m:mstyle fontsize="8pt">
+                        <m:mrow>
+                          <m:mn>2</m:mn>
+                        </m:mrow>
+                      </m:mstyle>
+                    </m:msub>
+                    <m:mrow>
+                      <m:mfrac>
+                        <m:mrow>
+                          <m:msup>
+                            <m:mi>d</m:mi>
+                            <m:mstyle fontsize="8pt">
+                              <m:mrow>
+                                <m:mn>2</m:mn>
+                              </m:mrow>
+                            </m:mstyle>
+                          </m:msup>
+                          <m:msub>
+                            <m:mi>x</m:mi>
+                            <m:mstyle fontsize="8pt">
+                              <m:mrow>
+                                <m:mn>2</m:mn>
+                              </m:mrow>
+                            </m:mstyle>
+                          </m:msub>
+                        </m:mrow>
+                        <m:mstyle fontstyle="italic">
+                          <m:mrow>
+                            <m:msup>
+                              <m:mtext>dt</m:mtext>
+                              <m:mstyle fontsize="8pt">
+                                <m:mrow>
+                                  <m:mn>2</m:mn>
+                                </m:mrow>
+                              </m:mstyle>
+                            </m:msup>
+                          </m:mrow>
+                        </m:mstyle>
+                      </m:mfrac>
+                      <m:mo stretchy="false">=</m:mo>
+                      <m:mi>k</m:mi>
+                    </m:mrow>
+                    <m:mo stretchy="false">(</m:mo>
+                    <m:mrow>
+                      <m:msub>
+                        <m:mi>x</m:mi>
+                        <m:mstyle fontsize="8pt">
+                          <m:mrow>
+                            <m:mn>1</m:mn>
+                          </m:mrow>
+                        </m:mstyle>
+                      </m:msub>
+                      <m:mo stretchy="false">−</m:mo>
+                      <m:msub>
+                        <m:mi>x</m:mi>
+                        <m:mstyle fontsize="8pt">
+                          <m:mrow>
+                            <m:mn>2</m:mn>
+                          </m:mrow>
+                        </m:mstyle>
+                      </m:msub>
+                    </m:mrow>
+                    <m:mrow>
+                      <m:mo stretchy="false">)</m:mo>
+                      <m:mo stretchy="false">−</m:mo>
+                      <m:msub>
+                        <m:mi fontstyle="italic">μM</m:mi>
+                        <m:mstyle fontsize="8pt">
+                          <m:mrow>
+                            <m:mn>2</m:mn>
+                          </m:mrow>
+                        </m:mstyle>
+                      </m:msub>
+                    </m:mrow>
+                    <m:mi>g</m:mi>
+                    <m:mfrac>
+                      <m:mstyle fontstyle="italic">
+                        <m:mrow>
+                          <m:msub>
+                            <m:mtext>dx</m:mtext>
+                            <m:mstyle fontsize="8pt">
+                              <m:mrow>
+                                <m:mn>2</m:mn>
+                              </m:mrow>
+                            </m:mstyle>
+                          </m:msub>
+                        </m:mrow>
+                      </m:mstyle>
+                      <m:mstyle fontstyle="italic">
+                        <m:mrow>
+                          <m:mtext>dt</m:mtext>
+                        </m:mrow>
+                      </m:mstyle>
+                    </m:mfrac>
+                  </m:mrow>
+                </m:mrow>
+              </m:mstyle>
+              <m:mrow/>
+            </m:mrow>
+            <m:annotation encoding="StarMath 5.0"> size 12{M rSub { size 8{2} }  {  {d rSup { size 8{2} } x rSub { size 8{2} } }  over  { ital "dt" rSup { size 8{2} } } } =k \( x rSub { size 8{1} }  - x rSub { size 8{2} }  \)  - μM rSub { size 8{2} } g {  { ital "dx" rSub { size 8{2} } }  over  { ital "dt"} } } {}</m:annotation>
+          </m:semantics>
+        </m:math>
+      </para>
+      <figure id="id5738540">
+        <media id="id15988397" alt=""><image src="../../media/graphics19.png" mime-type="image/png" height="55" width="259"/></media>
+      </figure>
+      <para id="id5738564">(Hình 3.12 Photo courtesy: Dr. Howard Blackburn)</para>
+      <para id="id5738570">Trong đó các thông số tượng trưng như sau: </para>
+      <para id="id5738579">M1=1 kg là khối lượng toa kéo; </para>
+      <para id="id5781382">M2=0.5 kg là khối lượng toa khách; </para>
+      <para id="id5781401">k=1 N/sec là độ cứng lò xo kết nối giữa 2 toa; </para>
+      <para id="id5781410">F=1 N là lực tác động của đầu máy (ngõ vào mô hình); </para>
+      <para id="id5781418">=0.002 sec/m là hệ số ma sát lăn; </para>
+      <para id="id5781434">g = 9.8 m/s^2 là gia tốc trọng trường </para>
+      <para id="id5781445">x1, x2 vị trí 2 toa (ngõ ra).</para>
+      <figure id="id5781474">
+        <media id="id15988550" alt=""><image src="../../media/graphics20.png" mime-type="image/png" height="134" width="390"/></media>
+      </figure>
+      <para id="id5781498">Hình 3.13 – Mô hình toán của hệ thống xe lửa</para>
+    </section>
+  </content>
+</document>

@@ -1,0 +1,218 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:md="http://cnx.rice.edu/mdml">
+  <title>Thiết kế - mô phỏng mạch và vẽ mạch in</title>
+  <metadata>
+  <md:content-id>m30743</md:content-id><md:title>Thiết kế - mô phỏng mạch và vẽ mạch in</md:title>
+  <md:abstract>Đây là giáo trình về thiết kế - mô phỏng mạch và vẽ mạch in</md:abstract>
+  <md:uuid>995e8545-365a-497e-aa87-275587b2e044</md:uuid>
+</metadata>
+
+<content>
+    <section id="id-512247835336">
+      <title>MỤc tiêu</title>
+      <para id="id5790458">Giúp sinh viên bước đầu làm quen với các phần mềm sau: Multisim V6.20 (Electronics WorkBench) dùng để mô phỏng các mạch tương tự và mạch số; OrCAD Release 9 dùng để vẽ Schematic, mô phỏng và vẽ mạch in (PCB). </para>
+    </section>
+    <section id="id-635136548708">
+      <title>Tham khẢo</title>
+      <para id="id5790516">[1]. OrCAD® Inc., User’s Guide - Capture, 1998. </para>
+      <para id="id5790538">[2]. OrCAD® Inc., User’s Guide - Layout, 1998.</para>
+      <para id="id5790560">[3].<link url="http://www.electronicsworkbench.com/tutorial/">http://www.electronicsworkbench.com/tutorial/</link></para>
+      <para id="id5790584">[4].<link url="http://www.rit.edu/~labeee/">http://www.rit.edu/~labeee/</link></para>
+    </section>
+    <section id="id-336242319162">
+      <title>ThỰc hành</title>
+      <para id="id5790615">Mặc dù Multisim và OrCAD/Pspice là các phần mềm rất lớn với nhiều tính năng áp dụng mạnh và phức tạp, nhưng sinh viên chuyên ngành Điện tử hoàn toàn có thể tự nghiên cứu được. Do đó, bài thí nghiệm này là không bắt buộc đối với tất cả sinh viên (đặc biệt là sinh viên Tin học, nếu có). </para>
+      <para id="id5790659">Trong trường hợp sinh viên không chọn bài thí nghiệm này thì có thể chọn Control System Toolbox (đối với sinh viên ĐKTĐ) hoặc Communications Toolbox (đối với sinh viên Viễn Thông) hoặc Image Processing Toolbox (đối với sinh viên Tin học) của MATLAB để khảo sát.</para>
+      <para id="id5790702">Bài thí nghiệm này tương đối dài, sinh viên cần sắp xếp thời gian hợp lý để thực hiện các công việc sau:</para>
+      <section id="id-180962149608">
+        <title>Multisim</title>
+        <para id="id5790721">Trong phần này, chúng ta sẽ làm quen với Multisim 6.20 (hiện đã có Multisim 2001 hoàn thiện hơn), đây là Version mới của Electronics WorkBench 5.x, nó cho phép sử dụng kết hợp thư viện linh kiện Analog và Digital với nhiều công cụ thân thiện, hổ trợ tuyệt vời cho việc mô phỏng các mạch điện tử.</para>
+        <para id="id5790739">Khởi động Multisim:</para>
+        <list id="id5790752" list-type="bulleted">
+          <item>Chạy file Multisim.exe từ Start menu của Windows</item>
+          <item>Nhấp vào biểu tượng <!--Sorry, this media type is not supported.--> trên Desktop.</item>
+        </list>
+        <para id="id5790802">Sinh viên hãy nhấp chuột vào các thư viện linh kiện của Multisim trên Menu bên trái của cửa sổ chính để có cái nhìn tổng quát về các linh kiện chức năng.</para>
+        <list id="id5790821" list-type="bulleted">
+          <item>Khi muốn đặt linh kiện nào vào không gian thiết kế, chỉ cần nhấp chuột vào linh kiện đó, rồi chọn thông số phù hợp và đặt vào vị trí mong muốn.</item>
+          <item>Để tạo một kết nối giữa 2 điểm, chỉ cần nhấp chuột vào điểm thứ nhất rồi kéo đến điểm thứ hai và nhấp chuột lần nữa.</item>
+        </list>
+        <para id="id5790842">
+        ***SORRY, THIS MEDIA TYPE IS NOT SUPPORTED.***
+      </para>
+        <para id="id5790868">Hình 7.1 – Giao diện chính của MultiSIM</para>
+        <para id="id5790874">Sinh viên hãy vẽ và mô phỏng mạch điện sau:</para>
+        <para id="id5790889">
+        ***SORRY, THIS MEDIA TYPE IS NOT SUPPORTED.***
+      </para>
+        <para id="id5790915">Hình 7.2 – Một mạch điện điển hình</para>
+        <list id="id5790921" list-type="bulleted">
+          <item>Dùng Osilsoscope quan sát dạng tín hiệu ở chân 2-6 và chân 3 của LM555.</item>
+          <item>Hãy ước lượng tần số giao động và chu kỳ thao tác của mạch.</item>
+        </list>
+        <para id="id5790941">Kinh nghiệm: Đôi lúc Multisim đưa ra bảng thông báo lỗi trong quá trình mô phỏng hay hiệu chỉnh thông số của các linh kiện. Trường hợp đó, ta gở bỏ khối Osilloscope, hiệu chỉnh và mô phỏng vài lần rồi gắn Osilloscope trở lại để quan sát dạng tín hiệu. Ngoài ra, nếu trong mạch có sử dụng các IC số (74xxx, 40xxx, …) ta phải có nguồn Vcc=5V như hình vẽ trên.</para>
+      </section>
+      <section id="id-623773890535">
+        <title>OrCAD</title>
+        <para id="id5790976">Các chức năng chính của OrCad gồm: Vẽ sơ đồ mạch (OrCAD Capture), mô phỏng mạch (OrCAD Pspice) và vẽ mạch in (OrCAD Layout). Tuy nhiên, trong phần thí nghiệm này chúng ta không đề cập đến OrCAD Pspice (đây là một trong những chức năng rất mạnh của OrCAD phiên bản 9.0 trở lên, đề nghị sinh viên tự nghiên cứu). </para>
+        <section id="id-551718626462">
+          <title>Vẽ sơ đồ mạch (Schematic) </title>
+          <para id="id5791002">Khởi động OrCAD Capture bằng một trong các cách sau:</para>
+          <list id="id5791017" list-type="bulleted">
+            <item>Chọn Capture CIS từ Start Menu của Window</item>
+            <item>Nhấp vào biểu tượng <!--Sorry, this media type is not supported.--> trên desktop</item>
+          </list>
+          <para id="id5715339">Để tạo một Project mới cho việc vẽ sơ đồ mạch ta thực hiện:</para>
+          <list id="id5715348" list-type="bulleted">
+            <item>Chọn File  New Project… hoặc nhấp vào icon <!--Sorry, this media type is not supported.--> trên Menu bar</item>
+            <item>Khi hộp thoại ‘New Project’ xuất hiện: Chọn ‘Schematic’ và đặt tên project trong menu ‘Name’ (giả sử là BaiTN7). Có thể chọn thư mục lưu project này trong menu ‘Location’.</item>
+          </list>
+          <para id="id5715467">Môi trường vẽ mạch xuất hiện khi ta nhấp đúp vào ‘PAGE1’ (hình 7.3). Từ đây ta lần lượt đặt các linh kiện vào và kết nối để được sơ đồ mong muốn.</para>
+          <figure id="id5715484">
+            <media id="id1172503401319" alt=""><image src="../../media/graphics1-9a41.png" mime-type="image/png" height="322" width="491"/></media>
+          </figure>
+          <para id="id5715508">Hình 7.3 – Môi trường vẽ mạch điện của OrCAD</para>
+          <para id="id5715514">Sử dụng Menu tắt sau:</para>
+          <para id="id5715519">
+        ***SORRY, THIS MEDIA TYPE IS NOT SUPPORTED.***
+      </para>
+          <para id="id5715545">(Hình 7.4)</para>
+          <para id="id5715550">Sinh viên hãy vẽ sơ đồ mạch như hình sau. Trong đó các thư viện linh kiện được sử dụng như sau:</para>
+          <list id="id5715568" list-type="bulleted">
+            <item>Discrete: R, Capacitor Pol, Capacitor Non-Pol, Resistor Var, Photo PNP và Speaker.</item>
+            <item>Opamp: TL082</item>
+            <item>Amplifier: LM386</item>
+          </list>
+          <para id="id5715614">Lưu Schematic vừa vẽ với tên BaiTN7. </para>
+          <figure id="id5715635">
+            <media id="id1172494239379" alt=""><image src="graphics2.wmf" mime-type="image/wmf" height="234" width="518"/></media>
+          </figure>
+          <para id="id5715659">(Hình 7.5)</para>
+        </section>
+        <section id="id-110369848524">
+          <title>Tạo Netlist </title>
+          <para id="id5715672">Sau khi lưu sơ đồ vừa vẽ, để tạo Netlist phục vụ cho việc vẽ mạch in ta thực hiện như sau:</para>
+          <list id="id5715683" list-type="bulleted">
+            <item>Đóng cửa sổ ‘Schematic1:Page1’, quay về Project Management ‘BaiTN7’</item>
+          </list>
+          <para id="id5715708">
+        ***SORRY, THIS MEDIA TYPE IS NOT SUPPORTED.***
+      </para>
+          <para id="id5715734">(Hình 7.6)</para>
+          <list id="id5715739" list-type="bulleted">
+            <item>Chọn Tools – Annotate… để đánh số thứ tự cho linh kiện.</item>
+            <item>Chọn Tool – Create Netlist…. để tạo Netlist.</item>
+            <item>Khi cửa sổ ‘Create Netlist’ xuất hiện, ta chọn layout Tab (file dữ liệu netlist là BaiTN7.MNL), OK.</item>
+          </list>
+          <para id="id5715814">Nếu đảm bảo rằng có file BaiTN7.MNL trong thư mục hiện hành thì thoát khỏi OrCAD Capture để chuẩn bị cho việc vẽ mạch in.</para>
+          <para id="id5715827">Lưu ý: Trong phần trên chúng ta không đề cập đến chức năng Kiểm tra mạch của OrCAD và một số chức năng hổ trợ khác.</para>
+        </section>
+        <section id="id-113522644358">
+          <title>Vẽ mạch in (Printed Circuit Board-PCB)</title>
+          <para id="id5715853">Khởi động OrCAD Layout bằng một trong các cách sau:</para>
+          <list id="id5715868" list-type="bulleted">
+            <item>Chọn Layout Plus trong Start Menu của Window</item>
+            <item>Nhấp vào biểu tượng <!--Sorry, this media type is not supported.--> trên desktop.</item>
+            <item>Chọn File  New để tạo một PCB layout mới</item>
+          </list>
+          <para id="id5715955">Sau thao tác này, cửa sổ ‘Load Template File’ xuất hiện, ta cần đặt đường dẫn chỉ đến file DEFAULT.tch trong OrCAD/Layout_plus/DATA. Sau đó thực hiện nạp file Netlist vừa tạo ở bước III.3.2 (ví dụ: BaiTN7.MNL).</para>
+          <para id="id5715988">Đặt footprint cho các linh kiện:</para>
+          <para id="id5716011">Nếu trong quá trình vẽ Schematic ta không chọn footprint cho các linh kiện mỗi khi đặt vào thì ở bước này OrCAD sẽ yêu cầu chọn kiểu chân cho các linh kiện theo menu sau:</para>
+          <figure id="id5716028">
+            <media id="id1172499036910" alt=""><image src="../../media/graphics3-a183.png" mime-type="image/png" height="276" width="377"/></media>
+          </figure>
+          <para id="id5716052">(Hình 7.7)</para>
+          <para id="id5716056">Nhấp vào menu ‘Link existing footprint to component …’, chọn lựa kiểu chân phù hợp cho từng loại linh kiện. Ở bước này, kiểu chân linh kiện cần chọn đúng kích thước (có thể phải tạo các footprint mới). Đối với bài thí nghiệm này, sinh viên có thể tham khảo bảng sau:</para>
+          <table id="id5716083" summary="">
+            <tgroup cols="3">
+              <colspec colnum="1" colname="c1"/>
+              <colspec colnum="2" colname="c2"/>
+              <colspec colnum="3" colname="c3"/>
+              <tbody>
+                <row>
+                  <entry>Linh kiện</entry>
+                  <entry>Footprint</entry>
+                  <entry>Thư viện</entry>
+                </row>
+                <row>
+                  <entry>R</entry>
+                  <entry>Jumper600</entry>
+                  <entry>JUMPER</entry>
+                </row>
+                <row>
+                  <entry>C</entry>
+                  <entry>CPCYL1/D.200/LS.100/.031</entry>
+                  <entry>TM_CAP_P</entry>
+                </row>
+                <row>
+                  <entry>Photo NPN</entry>
+                  <entry>TO92</entry>
+                  <entry>TO</entry>
+                </row>
+                <row>
+                  <entry>TL082, LM386</entry>
+                  <entry>DIP.100/8/W.300/LS.100/.425</entry>
+                  <entry>DIP100T</entry>
+                </row>
+                <row>
+                  <entry>VR</entry>
+                  <entry>VRES1</entry>
+                  <entry>VRES</entry>
+                </row>
+                <row>
+                  <entry>Speaker</entry>
+                  <entry>CYL/D.150/LS.100/.31</entry>
+                  <entry>TM_CYLND</entry>
+                </row>
+              </tbody>
+            </tgroup>
+          </table>
+          <para id="id5716336">Sắp xếp linh kiện: Quan sát menu bar, chọn chức năng thích hợp và sắp xếp các linh kiện trên board mạch. Ở bước này, nếu cần thiết ta có thể đưa vào thêm các linh kiện mới, chẳng hạn các lỗ (hold) để bắt ốc cho board mạch.</para>
+          <para id="id5716358">
+        ***SORRY, THIS MEDIA TYPE IS NOT SUPPORTED.***
+      </para>
+          <para id="id5663377">(Hình 7.8)</para>
+          <para id="id5663381">Đặt kích thước các đường mạch và khai báo số lớp: </para>
+          <list id="id5663395" list-type="bulleted">
+            <item>Chọn Options  Global Spacing … để đặt khoảng cách giữa Track, Via và Pad:</item>
+          </list>
+          <para id="id5663416">
+        ***SORRY, THIS MEDIA TYPE IS NOT SUPPORTED.***
+      </para>
+          <para id="id5663443">(Hình 7.9)</para>
+          <list id="id5663448" list-type="bulleted">
+            <item>Chọn Options  Jumper Settings …, OK hoặc View SpreadSheet  Layer để báo số lớp vẽ. Trong bài thí nghiệm này, ta vẽ board mạch 2 lớp, nên chỉ có TOP và BOTTOM là Routing. </item>
+          </list>
+          <para id="id5663522">
+        ***SORRY, THIS MEDIA TYPE IS NOT SUPPORTED.***
+      </para>
+          <para id="id5663549">(Hình 7.10)</para>
+          <list id="id5663554" list-type="bulleted">
+            <item>Chọn View SpreadSheet  Nets để đặt kích thước các đường mạch:</item>
+          </list>
+          <para id="id5663583">
+        ***SORRY, THIS MEDIA TYPE IS NOT SUPPORTED.***
+      </para>
+          <para id="id5663610">(Hình 7.11)</para>
+          <para id="id5663615">Vẽ mạch: OrCAD hổ trợ nhiều nhiều chiến lược vẽ mạch. Để khai thác tốt các chiến lược này đòi hỏi phải có một số kinh nghiệm nhất định. Thông thường, người ta hay vẽ các đường Nguồn – Mass với các tụ lọc nguồn thích hợp trước, sau đó thực hiện vẽ tự động từng phần và cuối cùng kết nối các phần vừa vẽ. Nên nhớ rằng, chế độ vẽ tự động chỉ giúp giảm thời gian, không có phần mềm nào vẽ mạch tự động tốt hơn tư duy của con người.</para>
+          <para id="id5663646">
+            <!--Sorry, this media type is not supported.-->
+            <!--Sorry, this media type is not supported.-->
+          </para>
+          <para id="id5663710">(Hình 7.12)</para>
+          <para id="id5663714">Một số thông số cần lưu ý (áp dụng cho các sinh viên vẽ và thuê gia công mạch Luận văn tốt nghiệp tại một số cơ sở ở Tp. HCM):</para>
+          <list id="id5663728" list-type="bulleted">
+            <item>Đường kính tối thiểu của các lỗ chân cắm và các via xuyên mạch: 55 mils (1000 mils=1 inches). Các lỗ chân linh kiện nên đặt thành hình oval.</item>
+            <item>Độ rộng tối thiểu của các đường mạch (track width): 15 mils (hiện nay tại Tp. HCM một số công ty có thể thực hiện mạch với độ rộng đường 6 mils).</item>
+            <item>Khoảng cách Track to Track nên &gt;15 mils</item>
+            <item>Để có thể vẽ xuyên qua giữa 2 chân IC, phải đặt khoảng cách Track to Pad thích hợp, nên 12  15 mils.</item>
+          </list>
+        </section>
+      </section>
+    </section>
+    <section id="id-63655341863">
+      <title>TỰ chỌn</title>
+      <para id="id5663787">Tự thiết kế và mô phỏng một mạch điện tử bằng Multsim</para>
+      <para id="id5663803">Vẽ mạch in cho mạch vừa thiết kế bằng OrCAD.</para>
+    </section>
+  </content>
+</document>

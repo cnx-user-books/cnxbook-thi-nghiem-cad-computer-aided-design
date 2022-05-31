@@ -1,0 +1,321 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:md="http://cnx.rice.edu/mdml">
+  <title>Hàm và Script files</title>
+  <metadata>
+  <md:content-id>m30487</md:content-id><md:title>Hàm và Script files</md:title>
+  <md:abstract>Đây là giáo trình về hàm và script files</md:abstract>
+  <md:uuid>32e2127a-2a7e-4d18-8b06-c87856b8b888</md:uuid>
+</metadata>
+
+<content>
+    <section id="id-533444885881">
+      <title>Mục tiêu</title>
+      <para id="id6036824">Bài thí nghiệm này giúp sinh viên tiếp cận với kỹ thuật lập trình trong Matlab thông qua việc sử dụng các hàm có sẵn, xây dựng các hàm mới dựa trên các cấu trúc if - for - while và tìm hiểu cách xây dựng script files, làm cơ sở cho việc lập trình mô phỏng các hệ thống Viễn thông và Tự động ở các bài sau. </para>
+    </section>
+    <section id="id-0978652019708">
+      <title>Tham khảo</title>
+      <para id="id5642948">[1].Nguyễn Hứa Duy Khang, Bài giảng môn CAD, Bộ môn Viễn thông &amp; Tự động hóa, khoa Công nghệ thông tin, Đại học Cần thơ, 2001.</para>
+      <para id="id5222413">[2].The Mathworks Inc., Matlab Notebook User’s Guide, 2003.</para>
+      <para id="id5511845">[3].Nguyễn Công Định, Phân tích và tổng hợp các hệ thống điều khiển bằng máy tính, NXB Khoa học và Kỹ thuật, 2002.</para>
+      <para id="id5486756">[4].Nguyễn Hữu Tình - Lê Tấn Hùng - Phạm Thị Ngọc Yến - Nguyễn Thị Lan Hương, Cơ sở Matlab &amp; ứng dụng, NXB KH và Kỹ thuật, 1999.</para>
+      <para id="id5222428">[5].<link url="http://www.mines.utah.edu/gg_computer_seminar/matlab/">http://www.mines.utah.edu/gg_computer_seminar/matlab/</link></para>
+      <para id="id3858797">[6]. <link url="http://www.glue.umd.edu/~nsw/ench250/matlab.htm">http://www.glue.umd.edu/~nsw/ench250/matlab.htm</link></para>
+    </section>
+    <section id="id-494342632546">
+      <title>Thực hành</title>
+      <para id="id5517465">Hàm và Script files trong Matlab đều được quản lý dưới dạng các tập tin có phần mở rộng .m, thường được soạn thảo bởi Matlab Editor. Khởi động Matlab Editor bằng một trong các cách sau:</para>
+      <list id="id5585663" list-type="bulleted">
+        <item>Nhấp chuột vào biểu tượng <!--Sorry, this media type is not supported.--> trên menu bar của cửa sổ lệnh.</item>
+        <item>File  New  M-file</item>
+        <item>Nhấp vào biểu tượng Matlab Editor trên desktop (nếu có).</item>
+      </list>
+      <para id="id4463105">Chúng ta lần lượt khảo sát qui cách xây dựng các hàm và script file. Sinh viên đọc và thực hành lần lượt theo các phần sau.</para>
+      <section id="id-832946872154">
+        <title>Script files</title>
+        <para id="id4463114">Tập hợp các dòng lệnh của Matlab được sắp xếp theo một cấu trúc nào đó và lưu thành file có phần mở rộng *.m được gọi là script file (file kịch bản, file chương trình). Ta có thể chạy file này từ cửa sổ lệnh giống hệt như các lệnh của Matlab. Cấu trúc của một script file như sau:</para>
+        <para id="id5450889">%------------------------------------------------------------------------------------------ %Phần viết sau dấu ‘%’ ở đây dùng cho lệnh help </para>
+        <para id="id5513750">%Thông thường phần này mô tả chức năng, cách sử dụng, </para>
+        <para id="id5050573">%ví dụ minh họa hay những lưu ý đặc biệt mà tác giả mong muốn trợ</para>
+        <para id="id4771246">% giúp cho người sử dụng.</para>
+        <para id="id5451124">%-----------------------------------------------------------------------------------------</para>
+        <para id="id5622680">[global tênbiến1, tênbiến2,… ]% Khai báo biến toàn cục  % (nếu có)</para>
+        <para id="id5540840">&lt;các câu lệnh&gt;% phần trình bày câu lệnh</para>
+        <para id="id3891670">Hãy khởi động Matlab Editor và tạo một script file có tên bai21.m, với nội dung như sau:</para>
+        <para id="id5642920">% Doan script file nay hien thi loi chao trong 2s. Sau do </para>
+        <para id="id4760117">% hien thi logo cua matlab mot cach sinh dong roi thoat</para>
+        <para id="id4760123">close all</para>
+        <para id="id4867556">% ---------------------- Tao mot cua so do hoa --------------------------------</para>
+        <para id="id4867567">figure('Color',[0 0 0],...</para>
+        <para id="id6018142">'Name','Welcome to Matlab Experiments',...</para>
+        <para id="id6015738">'NumberTitle','off',...</para>
+        <para id="id5743592">'MenuBar','none');</para>
+        <para id="id5743601">% ----------------------- Hien thi loi chao ----------------------------------------</para>
+        <para id="id4905055">text('String','Welcome to MATLAB',...</para>
+        <para id="id4344047">'Color',[.25 .25 .25],...</para>
+        <para id="id4344055">'Position',[0.01 .501],...</para>
+        <para id="id3606060">'Fontsize',32,...</para>
+        <para id="id4904991">'FontAngle','italic');</para>
+        <para id="id4904999">text( 'String','Welcome to MATLAB',...</para>
+        <para id="id5033080">'Color','w',...</para>
+        <para id="id5684608">'Position',[0 .5],...</para>
+        <para id="id4952448">'Fontsize',32,...</para>
+        <para id="id4952457">'FontAngle','italic');</para>
+        <para id="id5622133">axis off;</para>
+        <para id="id5622139">pause(2); % dung trong 2 giay</para>
+        <para id="id5992092">% ---------------------- Hien thi logo cua Matlab ------------------------------</para>
+        <para id="id5605215">logospin</para>
+        <para id="id3785483">% ---- Thoat - xoa cac bien trong workspace va dong cua so lai -----</para>
+        <para id="id3785492">clear</para>
+        <para id="id6037646">close</para>
+        <para id="id6037651">% ket thuc script file</para>
+        <para id="id6025228">Sau khi lưu file này, từ cửa sổ lệnh của Matlab, sinh viên hãy nhập:</para>
+        <para id="id6025238">&gt;&gt;help bai21</para>
+        <para id="id5816600">Để thi hành script file vừa soạn, hãy nhập:</para>
+        <para id="id5816604">&gt;&gt;bai21</para>
+        <para id="id5816609">Soạn thảo script file có tên bai22.m để lập biểu đồ tổng số sinh viên Điện Tử - Tin học tốt nghiệp tại khoa Công nghệ Thông tin, Đại học Cần thơ từ năm 1996 đến 2001 với dữ liệu như sau:</para>
+        <table id="id6028431" summary="">
+          <tgroup cols="3">
+            <colspec colnum="1" colname="c1"/>
+            <colspec colnum="2" colname="c2"/>
+            <colspec colnum="3" colname="c3"/>
+            <tbody>
+              <row>
+                <entry>Năm</entry>
+                <entry>Kỹ sư Điện tử</entry>
+                <entry>Kỹ sư Tin học</entry>
+              </row>
+              <row>
+                <entry>1996</entry>
+                <entry>38</entry>
+                <entry>48</entry>
+              </row>
+              <row>
+                <entry>1997</entry>
+                <entry>33</entry>
+                <entry>54</entry>
+              </row>
+              <row>
+                <entry>1998</entry>
+                <entry>36</entry>
+                <entry>120</entry>
+              </row>
+              <row>
+                <entry>1999</entry>
+                <entry>31</entry>
+                <entry>92</entry>
+              </row>
+              <row>
+                <entry>2000</entry>
+                <entry>60</entry>
+                <entry>110</entry>
+              </row>
+              <row>
+                <entry>2001</entry>
+                <entry>70</entry>
+                <entry>131</entry>
+              </row>
+            </tbody>
+          </tgroup>
+        </table>
+        <para id="id5743842">Nội dung của script file như sau:</para>
+        <para id="id5743851">%</para>
+        <para id="id5743856">% Lap bieu do tong so sinh vien Dien tu – Tin hoc tot nghiep tại </para>
+        <para id="id5641205">% Khoa Cong nghe Thong tin, Dai hoc Can tho, tu 1996-2001</para>
+        <para id="id5641211">% </para>
+        <para id="id5661845">svdt=[38 33 36 31 60 70];% sinh vien Dien tu</para>
+        <para id="id5661854">svth=[48 54 120 92 110 131];%sinh vien Tin hoc</para>
+        <para id="id5662039">nam=1996:2001;</para>
+        <para id="id5662044">subplot(211), bar(nam,svdt);</para>
+        <para id="id5662049">title('Sinh vien Dien tu tot nghiep tu 1996-2001');</para>
+        <para id="id5641504">subplot(212), bar(nam,svth);</para>
+        <para id="id5641509">title('Sinh vien Tin hoc tot nghiep tu 1996-2001');</para>
+        <para id="id6035806">Colormap(cool);</para>
+        <para id="id6035812">%</para>
+        <para id="id6035816">Thi hành file này từ cửa sổ lệnh. Sinh viên có thể dùng lệnh help bar để biết các thông số của hàm này và hiệu chỉnh (tùy thích) một số chức năng hiển thị của hàm bar trong file bai22.m.</para>
+        <list id="id5622531" list-type="bulleted">
+          <item>Sinh viên hãy tạo một script file có tên bai23.m để vẽ các đồ thị trên hình 2.1.</item>
+        </list>
+      </section>
+      <section id="id-64811497823">
+        <title>Sử dụng các hàm xây dựng sẵn</title>
+        <para id="id5642716">Matlab hổ trợ một thư viện hàm rất phong phú, xây dựng trên các giải thuật nhanh và có độ chính xác cao. Ngoài các hàm cơ bản của Matlab, tập hợp các hàm dùng để giải quyết một ứng dụng chuyên biệt nào đó gọi là Toolbox, ví dụ: Xử lý số tín hiệu (Digital Signal Processing), Điều khiển tự động (Control), Mạng Nơron nhân tạo (Neural networks), …</para>
+        <para id="id2365597">Sinh viên xem lại giáo trình để biết thêm về các hàm. Ngoài ra, có thể dùng lệnh help để biết chức năng của toolbox và hàm cũng như cách thức sử dụng chúng.</para>
+        <para id="id6037855">help &lt;ten toolbox&gt;% chuc nang toolbox</para>
+        <para id="id6037863">&gt;&gt;help control % liet ke ham cua control toolbox</para>
+        <para id="id6038056">help &lt;ten ham&gt;% chuc nang ham</para>
+        <para id="id6038068">&gt;&gt;help plot% chuc nang ham plot</para>
+        <para id="id6035756">Ta có thể tìm kiếm các hàm liên quan bằng cách cung cấp cho hàm lookfor của Matlab một từ khóa:</para>
+        <para id="id6038293">lookfor &lt;tu khoa tim kiem&gt;</para>
+        <para id="id6038302">&gt;&gt;lookfor filter % tìm các hàm liên quan đến mạch lọc</para>
+        <para id="id5643120">
+        ***SORRY, THIS MEDIA TYPE IS NOT SUPPORTED.***
+      </para>
+        <para id="id6038119">(Hình 2.1 – dùng cho câu III.1.3)</para>
+        <para id="id6038124">Hàm [Y I]=max(X) cho biết phần tử lớn nhất của vectơ (mãng) X với chỉ số tương tứng I.</para>
+        <para id="id6037775">&gt;&gt;help max</para>
+        <para id="id6038409">&gt;&gt; x=[1 5 9 7 6 4];</para>
+        <para id="id6038414">&gt;&gt; [y,i]=max(x)</para>
+        <para id="id6038419">y =</para>
+        <para id="id6038423">9</para>
+        <para id="id6028259">i =</para>
+        <para id="id6028263">3</para>
+        <para id="id6028270">Nghĩa là phần tử thứ i=3 của vectơ x có giá trị lớn nhất, y=9.</para>
+        <para id="id6037547">Hàm Y=exp(X), tính eX, kết quả trả về cho Y.</para>
+        <para id="id6028304">&gt;&gt;help exp</para>
+        <para id="id6028308">&gt;&gt;x=0:0.05:1;</para>
+        <para id="id6028313">&gt;&gt;y=exp(x);</para>
+        <para id="id6038490">&gt;&gt;stem(x,y)% giong ham plot nhung ve cho tin hieu roi rac</para>
+        <para id="id6038498">Giả sử ta muốn điều chế biên độ sóng mang được truyền hai băng cạnh (Double sideband transmission carrier Amplitude Modulation) với:</para>
+        <list id="id6028158" list-type="bulleted">
+          <item>Tín hiệu điều chế X=0.2*sin(2*pi*t) với t:0:0.01:10</item>
+          <item>Tần số sóng mang fc=620KHz</item>
+        </list>
+        <para id="id6037810">Sinh viên hãy tìm hàm thích hợp và vẽ tín hiệu thu được sau khi điều chế, có dạng như hình 2.2:</para>
+        <figure id="id6038005">
+          <media id="id1166563150413" alt=""><image src="graphics1.wmf" mime-type="image/wmf" height="150" width="532"/></media>
+        </figure>
+        <para id="id6037472">Hình 2.2 – Tín hiệu thu được sau khi điều chế biên độ</para>
+      </section>
+      <section id="id-945744995057">
+        <title>Xây dựng hàm</title>
+        <para id="id6037428">Việc xây dựng hàm cũng được thực hiện tương tự như script file. Tuy nhiên, đối với hàm ta cần quan tâm đến các tham số truyền cho hàm và các kết quả trả về sau khi thực hiện. Có 3 điểm cần lưu ý:</para>
+        <list id="id6037435" list-type="bulleted">
+          <item>Tên hàm phải được đặt trùng với tên file lưu trữ.</item>
+          <item>Phải có từ khóa function ở dòng đầu tiên.</item>
+          <item>Trong một hàm có thể xây dựng nhiều hàm con (điều này không có trong script file). Kết thúc hàm con phải có từ khóa end (điều này không cần trong hàm ‘cha’).</item>
+        </list>
+        <para id="id6028190">Qui cách xây dựng hàm được mô tả như sau:</para>
+        <para id="id6028199">function [out1,out2,…]=tenham(in1,in2,…)</para>
+        <para id="id6027952">% ---------------------------------------------------------------------------------------</para>
+        <para id="id6038383">%Phần này sẽ hiển thị khi người sử dụng dùng lệnh help tenham</para>
+        <para id="id6038399">% ----------------------------------------------------------------------------------------</para>
+        <para id="id6037398">[global &lt;tênbiến1, tênbiến2, …&gt;]%khai báo biến toàn cục (nếu có)</para>
+        <para id="id6037412">&lt;Các câu lệnh thực hiện hàm&gt;</para>
+        <para id="id6037936">out1=kết quả1%kết quả trả về của hàm</para>
+        <para id="id6037947">out2=kết quả2</para>
+        <para id="id6028077">…</para>
+        <para id="id6028081">% Các hàm con (nếu có)</para>
+        <para id="id6028086">[ function [subout1,subout2,…]=tenhamcon(subin1,subin2,…)</para>
+        <para id="id6037680">&lt;Các câu lệnh của hàm con&gt;</para>
+        <para id="id6038179">end ] %từ khóa end khong can doi voi Matlab Version 6.x</para>
+        <para id="id5643089">Xây dựng hàm gptb2 để giải phương trình bậc hai ax2+bx+c=0. Nội dung hàm như sau:</para>
+        <para id="id6037714"> function [x1,x2]=gptb2(a,b,c) </para>
+        <para id="id6037721">% Giai phuong trinh bac hai ax^2+bx+c=0</para>
+        <para id="id6038082">% [x1,x2]=gptb2(a,b,c)</para>
+        <para id="id6038094">% Trong do: x1,x2 nghiem thuc hoac phuc</para>
+        <para id="id6037492">% a,b,c la 3 he so cua phuong trinh</para>
+        <para id="id6037503">%</para>
+        <para id="id6037828">% Vi du: [x1,x2]=gptb2(1,-3,2)</para>
+        <para id="id6037836">%</para>
+        <para id="id6037843">% Copyright 2003 Nguyen Chi Ngon TcAD - CIT - Cantho University</para>
+        <para id="id6024698">% Email: ncngon@cit.ctu.edu.vn</para>
+        <para id="id6024705">if nargin&lt;3</para>
+        <para id="id6024713">error('Vui long nhap du 3 he so cua phuong trinh')</para>
+        <para id="id6037742">elseif a==0</para>
+        <para id="id6037751">x1=-c/b;</para>
+        <para id="id6037351">x2=[];</para>
+        <para id="id6037359">else </para>
+        <para id="id6038036">D = b^ 2 - 4*a*c; </para>
+        <para id="id6038044">x1 = (-b+sqrt(D))/(2*a); </para>
+        <para id="id6037574">x2 = (-b-sqrt(D))/(2*a);</para>
+        <para id="id6037582">end</para>
+        <para id="id6037597">Sau khi lưu file này với tên gptb2.m, sinh viên thử kiểm chứng kết quả:</para>
+        <para id="id6037909">&gt;&gt;help gptb2</para>
+        <para id="id6037913">&gt;&gt;[x1,x2]=gptb2(1,6,-7)</para>
+        <para id="id6037919">&gt;&gt;[x1,x2]=gptb2(2,7,14)</para>
+        <para id="id6037924">&gt;&gt;[x1,x2]=gptb2(0,4,3)</para>
+        <para id="id6037884">&gt;&gt;[x1,x2]=gptb2(1,6)</para>
+        <para id="id6037889"> Cho biết ý nghĩa của từ khóa nargin? </para>
+        <para id="id5722945"> Sinh viên hãy viết lại hàm này để kết quả chỉ trả về nghiệm số thực.</para>
+        <para id="id5621862">Xây dựng hàm vdcongdb(a,m,method) để vẽ một số đường cong đặc biệt trong hệ tọa độ cực, với a là bán kính và m là số đường cong vẽ trên cùng trục tọa độ. Trường hợp này hàm không trả về giá trị nên ta không cần biến ngõ ra.</para>
+        <para id="id5540510">Tuỳ theo giá trị của tham số ‘method’ mà ta vẽ đồ thị tương ứng:</para>
+        <para id="id5766763">Nếu method = ’Becnulli’: Vẽ đường Lemniscat Becnulli: 
+<m:math><m:semantics><m:mrow><m:mstyle fontsize="12pt"><m:mrow><m:mrow><m:mrow><m:mi>r</m:mi><m:mo stretchy="false">=</m:mo><m:mi>a</m:mi></m:mrow><m:msqrt><m:mrow><m:mo stretchy="false">∣</m:mo><m:mrow><m:mn>2</m:mn><m:mtext>cos</m:mtext><m:mn>2θ</m:mn></m:mrow><m:mo stretchy="false">∣</m:mo></m:mrow></m:msqrt></m:mrow></m:mrow></m:mstyle><m:mrow/></m:mrow><m:annotation encoding="StarMath 5.0"> size 12{r=a sqrt { lline 2"cos"2θ rline } } {}</m:annotation></m:semantics></m:math></para>
+        <para id="id5816572">Nếu method = ’Astroit’: Vẽ đường Astroit: 
+<m:math><m:semantics><m:mrow><m:mstyle fontsize="12pt"><m:mrow><m:mrow><m:mrow><m:mi>r</m:mi><m:mo stretchy="false">=</m:mo><m:mi>a</m:mi></m:mrow><m:msqrt><m:mrow><m:mo stretchy="false">∣</m:mo><m:mrow><m:mn>1</m:mn><m:mo stretchy="false">−</m:mo><m:mfrac><m:mrow><m:mtext>sin</m:mtext><m:mn>3θ</m:mn></m:mrow><m:mn>4</m:mn></m:mfrac></m:mrow><m:mo stretchy="false">∣</m:mo></m:mrow></m:msqrt></m:mrow></m:mrow></m:mstyle><m:mrow/></m:mrow><m:annotation encoding="StarMath 5.0"> size 12{r=a sqrt { lline 1 -  {  {"sin"3θ}  over  {4} }  rline } } {}</m:annotation></m:semantics></m:math></para>
+        <para id="id5726020">Nếu method = ‘Xoanoc’: Vẽ đường xoắn ốc: 
+<m:math><m:semantics><m:mrow><m:mstyle fontsize="12pt"><m:mrow><m:mrow><m:mrow><m:mi>r</m:mi><m:mo stretchy="false">=</m:mo><m:mtext>cos</m:mtext></m:mrow><m:mrow><m:mi>θ</m:mi><m:mo stretchy="false">+</m:mo><m:mn>1</m:mn></m:mrow></m:mrow></m:mrow></m:mstyle><m:mrow/></m:mrow><m:annotation encoding="StarMath 5.0"> size 12{r="cos"θ+1} {}</m:annotation></m:semantics></m:math></para>
+        <para id="id5818431">Nội dung hàm như sau:</para>
+        <para id="id5818440"> function vdcongdb(a,m,method)</para>
+        <para id="id5818455">% Ve duong cong trong toa do cuc: vdcongdb(a,m,method)</para>
+        <para id="id5818462">% method = 'Becnulli' - Ve duong Lemniscat Becnulli:</para>
+        <para id="id5746755">% r=a*sqrt(abs(2*cos(2*theta)))</para>
+        <para id="id5746764">% 'Astroit' - Ve duong Astroit:</para>
+        <para id="id5746777">% r=a*sqrt(abs(1-sin(3*theta)/4))</para>
+        <para id="id5746786">% 'Xoanoc' - Ve duong xoan oc:</para>
+        <para id="id5746800">% r=a*cos(theta)+1</para>
+        <para id="id5745372">% Voi: a-ban kinh; m-so duong cong ve tren cung he truc</para>
+        <para id="id5745384">% Vi du: vdcongdb(0.5, 4, 'Becnulli')</para>
+        <para id="id5745401">%</para>
+        <para id="id5745406">% Copyright 2003 Nguyen Chi Ngon, TcAD - CIT - CTU</para>
+        <para id="id5745412">% Email: ncngon@cit.ctu.edu.vn</para>
+        <para id="id5745417">if nargin&lt;3</para>
+        <para id="id5745423">error('Vui long nhap du 3 thong so cua ham')</para>
+        <para id="id5745432">else</para>
+        <para id="id5746811">theta=0:0.01:2*pi; method=upper(method);</para>
+        <para id="id5746824">switch method</para>
+        <para id="id5746833"> case 'BECNULLI'</para>
+        <para id="id5746845">r=a*sqrt(abs(2*cos(2*theta)));</para>
+        <para id="id5746854"> case 'ASTROIT'</para>
+        <para id="id5746866">r=a*sqrt(abs(1-sin(3*theta)/4));</para>
+        <para id="id5746875"> case 'XOANOC'</para>
+        <para id="id5805700">r=a*cos(theta)+1;</para>
+        <para id="id5805709"> otherwise</para>
+        <para id="id5805721">error('Chon: ''Becnuli'', ''Aristod'' hoac ''Xoanoc''')</para>
+        <para id="id5805731">end % end of switch</para>
+        <para id="id5805748">% ve do thi</para>
+        <para id="id5805752">close all; figure('Color','w');</para>
+        <para id="id5805761">for k=1:m</para>
+        <para id="id5805770">hold on</para>
+        <para id="id5781299">r1=r*k;</para>
+        <para id="id5781308">mau=[rand(1,1) rand(1,1) rand(1,1)];</para>
+        <para id="id5781317">h=polar(theta,r1);</para>
+        <para id="id5781327">set(h,'color',mau,'LineWidth',2);</para>
+        <para id="id5781336">axis equal;</para>
+        <para id="id5781346">end % end of for</para>
+        <para id="id5781363">hold off; </para>
+        <para id="id5782364">axis off</para>
+        <para id="id5782368">end % end of if</para>
+        <para id="id5782382">Sinh viên hãy kiểm chứng lại hoạt động của hàm, ví dụ:</para>
+        <para id="id5782389">&gt;&gt;help vdcongdb</para>
+        <para id="id5782394">&gt;&gt;vdcongdb(1,5,’Becnulli’)</para>
+        <para id="id5782399">&gt;&gt;vdcongdb(1,5,’ Astroit’)</para>
+        <para id="id5782404">&gt;&gt;vdcongdb(1,5,’Xoanoc’)</para>
+        <para id="id5782409">&gt;&gt; vdcongdb(1,5,’saikieu’)</para>
+        <para id="id5782414">&gt;&gt; vdcongdb(5,’becnulli’)</para>
+        <para id="id5782419">&gt;&gt; ….</para>
+        <para id="id5782423">Xây dựng hàm dudoan() để dự đoán kết quả sau mỗi lần tung một xúc xắc đồng nhất, 6 mặt. Nội dung hàm như sau:</para>
+        <para id="id5744991"> function dudoan()</para>
+        <para id="id5745008">% Du doan ket qua sau moi lan tung ngau nhien mot xuc xac 6 mat</para>
+        <para id="id5745014">% Chuong trinh lap lai cho den khi nguoi su dung khong doan tiep</para>
+        <para id="id5745021">%</para>
+        <para id="id5745026">% Copyright 2003, Nguyen Chi Ngon TcAD - CIT, Cantho University</para>
+        <para id="id5745032">% Email: ncngon@ctu.edu.vn</para>
+        <para id="id5745038">tiep = 'y'; sai=0; dung=0;</para>
+        <para id="id5745043">disp('Chao mung ban den voi Casino nay!')</para>
+        <para id="id5745048">while(lower(tiep)=='y')</para>
+        <para id="id5745054">doan=input('Moi ban du doan ket qua (1-6):');</para>
+        <para id="id5745061">kqua=tungxx;</para>
+        <para id="id5755456">if (doan ~= kqua)</para>
+        <para id="id5755465">disp('Xin loi, ban da doan sai!')</para>
+        <para id="id5755474">sai=sai+1;</para>
+        <para id="id5755484">else</para>
+        <para id="id5755492">disp('Xin chuc mung!')</para>
+        <para id="id5755502">dung=dung+1;</para>
+        <para id="id5755512">end</para>
+        <para id="id5755520">tiep=input('Ban muon choi tiep(''y''/''n''):');</para>
+        <para id="id5755529">end</para>
+        <para id="id5755534">disp(['Dung ' num2str(dung) ' trong tong so ' num2str(sai+dung) ' lan doan'])</para>
+        <para id="id5663196">% subfunction --------------</para>
+        <para id="id5663201">function mat = tungxx()</para>
+        <para id="id5663206">mat=floor(6*rand(1,1))+1;</para>
+        <para id="id5663215">% end</para>
+        <para id="id5663222">Sinh viên thử sử dụng hàm này và cho biết sự khác nhau giữa script file và hàm không có tham số vào.</para>
+      </section>
+    </section>
+    <section id="id-863452416324">
+      <title>TỰ chỌn</title>
+      <para id="id5663240">Viết chương trình tìm nghiệm thực của phương trình bậc 2.</para>
+      <para id="id5663255">Viết chương trình in tam giác Pascal n dòng trong màn hình đồ họa với n được nhập từ bàn phím.</para>
+    </section>
+  </content>
+</document>
